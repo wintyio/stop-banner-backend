@@ -47,9 +47,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     boolean chk(HttpServletRequest request)
             throws ServletException {
         String path = request.getRequestURI();
-        String[] exclude = {"/register/password", "/login/password"};
+        String[] exclude = {"/user/get", "/login/password"};
         for (String ex : exclude) {
             if (ex.equals(path)) return false;
+        }
+        String[] exclude2 = {"/swagger-ui", "/swagger-resources", "/v3/api-docs"};
+        for (String ex : exclude2) {
+            if (path.startsWith(ex)) return false;
         }
         return true;
     }
@@ -60,6 +64,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         if (chk(request)) {
             try {
+                String path = request.getRequestURI();
+                logger.error(path);
                 Long userId = Long.valueOf(jwtService.getUserId());
                 UserDetails userDetails = customUserDetailsService.loadUserByUserid(userId);
 
