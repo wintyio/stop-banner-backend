@@ -16,9 +16,6 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
     private String img;
     private Long lat;
     private Long lng;

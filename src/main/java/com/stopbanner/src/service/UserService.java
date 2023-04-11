@@ -39,7 +39,7 @@ public class UserService {
     public String loginSub(String sub) throws BaseException {
         try {
             User user = userRepository.findBySub(sub);
-            return jwtService.createJwt(user.getId());
+            return jwtService.createJwt(user.getSub());
         } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }
@@ -93,7 +93,7 @@ public class UserService {
                 throw new BaseException(DISABLED_USER);
             }
             PostLoginRes postLoginRes = new PostLoginRes();
-            postLoginRes.setToken(jwtService.createJwt(user.getId()));
+            postLoginRes.setToken(jwtService.createJwt(user.getSub()));
             return postLoginRes;
         } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);

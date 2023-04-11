@@ -14,13 +14,13 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "reportor_id")
+    private User reportor_id;
     @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @JoinColumn(name = "reported_id")
+    private User reported_id;
     @ManyToOne
-    @JoinColumn(name = "post_Id")
+    @JoinColumn(name = "post_id")
     private Post post;
     private String content;
     private LocalDateTime createDate;

@@ -2,19 +2,19 @@ package com.stopbanner.src.service;
 
 import com.stopbanner.config.BaseException;
 import com.stopbanner.src.domain.Post;
-import com.stopbanner.src.domain.User;
 import com.stopbanner.src.model.Post.PostCreateReq;
 import com.stopbanner.src.model.Post.PostCreateRes;
+import com.stopbanner.src.model.Post.PostRes;
 import com.stopbanner.src.repository.*;
-import com.stopbanner.src.security.SecurityUserDetailsService;
-import com.stopbanner.utils.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.stopbanner.config.BaseResponseStatus.DATABASE_ERROR;
 
@@ -25,15 +25,13 @@ import static com.stopbanner.config.BaseResponseStatus.DATABASE_ERROR;
 public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-    private final MemberRepository memberRepository;
     private final CityRepository cityRepository;
     private final LocalRepository localRepository;
-    public PostCreateRes createPost(PostCreateReq postCreateReq, String sub) throws BaseException {
+    public PostCreateRes createPost(PostCreateReq postCreateReq, String url, String sub) throws BaseException {
         try {
             Post post = new Post();
             post.setUser(userRepository.findBySub(sub));
-            post.setMember(memberRepository.getReferenceById(postCreateReq.getMemberId()));
-            post.setImg(postCreateReq.getImg());
+            post.setImg(url);
             post.setLat(postCreateReq.getLat());
             post.setLng(postCreateReq.getLng());
             post.setCity(cityRepository.getReferenceById(postCreateReq.getCityId()));
@@ -44,6 +42,15 @@ public class PostService {
             PostCreateRes postCreateRes = new PostCreateRes(1L);
             return postCreateRes;
         } catch (Exception exception) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+    public List<PostRes> findAll() throws BaseException {
+        try {
+            List<Post> list = postRepository.findAllByOrderByCreateDateDesc();
+            return list.stream().map(PostRes::new).collect(Collectors.toList());
+        }
+        catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }
     }

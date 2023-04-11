@@ -21,11 +21,11 @@ public class JwtService {
     @param userIdx
     @return String
      */
-    public String createJwt(Long userIdx) {
+    public String createJwt(String sub) {
         Date now = new Date();
         return Jwts.builder()
                 .setHeaderParam("type","jwt")
-                .claim("userId",userIdx)
+                .claim("sub", sub)
                 .setIssuedAt(now)
                 .setExpiration(new Date(System.currentTimeMillis()+1000*60*60*24*365)) //1*(1000*60*60*24*365)))
                 .signWith(SignatureAlgorithm.HS256, Secret.JWT_SECRET_KEY)
@@ -46,7 +46,7 @@ public class JwtService {
     @return int
     @throws BaseException
      */
-    public Long getUserId() throws BaseException {
+    public String getUserSub() throws BaseException {
         //1. JWT 추출
         String accessToken = getJwt();
         if (accessToken == null || accessToken.length() == 0) {
@@ -69,6 +69,6 @@ public class JwtService {
         }
 
         // 3. userIdx 추출
-        return claims.getBody().get("userId", Long.class);  // jwt 에서 userIdx를 추출합니다.
+        return claims.getBody().get("sub", String.class);  // jwt 에서 userIdx를 추출합니다.
     }
 }

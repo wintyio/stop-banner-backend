@@ -47,7 +47,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     boolean chk(HttpServletRequest request)
             throws ServletException {
         String path = request.getRequestURI();
-        String[] exclude = {"/user/get", "/login/password"};
+        String[] exclude = {"/user/get", "/login/password", "user/login"};
         for (String ex : exclude) {
             if (ex.equals(path)) return false;
         }
@@ -65,8 +65,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (chk(request)) {
             try {
                 String path = request.getRequestURI();
-                Long userId = Long.valueOf(jwtService.getUserId());
-                UserDetails userDetails = customUserDetailsService.loadUserByUserid(userId);
+                String sub = jwtService.getUserSub();
+                UserDetails userDetails = customUserDetailsService.loadUserByUsername(sub);
 
                 UsernamePasswordAuthenticationToken auth =
                         new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
