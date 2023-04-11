@@ -65,12 +65,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (chk(request)) {
             try {
                 String path = request.getRequestURI();
-                logger.error(path);
                 Long userId = Long.valueOf(jwtService.getUserId());
                 UserDetails userDetails = customUserDetailsService.loadUserByUserid(userId);
 
                 UsernamePasswordAuthenticationToken auth =
-                        // 여기에서 super.setAuthenticated(true) 세팅
                         new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(auth);
             } catch (BaseException exception) {

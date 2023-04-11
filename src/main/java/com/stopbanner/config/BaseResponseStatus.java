@@ -63,6 +63,8 @@ public enum BaseResponseStatus {
     DUPLICATED_EMAIL(false, 3013, "중복된 이메일입니다."),
     FAILED_TO_PASSWORD_LOGIN(false,3014,"없는 아이디거나 비밀번호가 틀렸습니다."),
     FAILED_TO_GOOGLE_LOGIN(false,3015,"가입된 구글 계정이 없습니다."),
+    FAILED_TO_KAKAO_LOGIN(false,3016,"카카오 로그인 에러"),
+    DISABLED_USER(false,3017,"삭제된 사용자입니다."),
 
 
 

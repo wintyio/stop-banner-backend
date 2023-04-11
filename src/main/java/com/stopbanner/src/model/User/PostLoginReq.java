@@ -1,4 +1,4 @@
-package com.stopbanner.src.model.Login;
+package com.stopbanner.src.model.User;
 
 import lombok.*;
 
@@ -10,5 +10,5 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostLoginReq {
     @NotEmpty
-    private String idToken;
+    private String accessToken;
 }

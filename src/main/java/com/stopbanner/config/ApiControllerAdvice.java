@@ -14,7 +14,6 @@ import java.util.Map;
 @Slf4j
 @RestControllerAdvice
 public class ApiControllerAdvice {
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<BaseResponse<Map<String, String>>> handleValidationExceptions(MethodArgumentNotValidException exception) {
         log.error(BaseResponseStatus.REQUEST_ERROR.getMessage());

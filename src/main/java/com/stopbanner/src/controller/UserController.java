@@ -2,8 +2,8 @@ package com.stopbanner.src.controller;
 
 import com.stopbanner.config.BaseException;
 import com.stopbanner.config.BaseResponse;
-import com.stopbanner.src.model.Login.PostLoginReq;
-import com.stopbanner.src.model.Login.PostLoginRes;
+import com.stopbanner.src.model.User.PostLoginReq;
+import com.stopbanner.src.model.User.PostLoginRes;
 import lombok.extern.slf4j.Slf4j;
 import com.stopbanner.src.service.UserService;
 import com.stopbanner.utils.JwtService;
@@ -26,24 +26,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    /*
     @PostMapping ("/login")
-    public BaseResponse<PostGoogleRes> google(@Valid @RequestBody PostGoogleReq postGoogleReq) {
+    public BaseResponse<PostLoginRes> google(@Valid @RequestBody PostLoginReq postLoginReq) {
         try {
-            RestTemplate restTemplate = new RestTemplate();
-            ResponseEntity<Map> resultEntity = restTemplate.getForEntity(GOOGLE_TOKEN_BASE_URL + "?id_token=" + postGoogleReq.getIdToken(), Map.class);
-            if (resultEntity.getStatusCode() != HttpStatus.OK) {
-                throw new BaseException(INVALID_TOKEN);
-            }
-            log.error(resultEntity.getBody().get("sub").toString());
-            String token = userService.loginGoogle(resultEntity.getBody().get("sub").toString());
-            PostGoogleRes postGoogleRes = new PostGoogleRes(token);
-            return new BaseResponse<>(postGoogleRes);
+            return new BaseResponse<>(userService.login(postLoginReq.getAccessToken()));
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
-    */
 
     @PostMapping ("/get")
     public BaseResponse<PostLoginRes> login() {
