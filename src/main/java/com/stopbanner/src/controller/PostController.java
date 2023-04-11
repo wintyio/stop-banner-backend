@@ -37,10 +37,9 @@ public class PostController {
         this.s3Service = s3Service;
     }
 
-
     @PostMapping("/create")
     public BaseResponse<PostCreateRes> create(@AuthenticationPrincipal SecurityUser securityUser,
-                                              @Valid @RequestBody PostCreateReq postCreateReq) {
+                                              @Valid PostCreateReq postCreateReq) {
         try {
             String url = s3Service.upload(postCreateReq.getImg());
             return new BaseResponse<>(postService.createPost(postCreateReq, url, securityUser.getUser().getSub()));

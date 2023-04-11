@@ -38,6 +38,8 @@ public class PostService {
             post.setLocal(localRepository.getReferenceById(postCreateReq.getLocalId()));
             post.setAddress(postCreateReq.getAddress());
             post.setCreateDate(LocalDateTime.now());
+            post.setLocal(localRepository.getReferenceById(postCreateReq.getLocalId()));
+            post.setIs_active(true);
             postRepository.save(post);
             PostCreateRes postCreateRes = new PostCreateRes(1L);
             return postCreateRes;
@@ -47,7 +49,7 @@ public class PostService {
     }
     public List<PostRes> findAll() throws BaseException {
         try {
-            List<Post> list = postRepository.findAllByOrderByCreateDateDesc();
+            List<Post> list = postRepository.findAllByOrderByCreateDate();
             return list.stream().map(PostRes::new).collect(Collectors.toList());
         }
         catch (Exception exception) {

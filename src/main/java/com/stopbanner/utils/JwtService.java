@@ -1,6 +1,5 @@
 package com.stopbanner.utils;
 
-
 import com.stopbanner.config.BaseResponseStatus;
 import com.stopbanner.config.secret.Secret;
 import io.jsonwebtoken.*;
@@ -27,7 +26,7 @@ public class JwtService {
                 .setHeaderParam("type","jwt")
                 .claim("sub", sub)
                 .setIssuedAt(now)
-                .setExpiration(new Date(System.currentTimeMillis()+1000*60*60*24*365)) //1*(1000*60*60*24*365)))
+                .setExpiration(new Date(System.currentTimeMillis()+1000*60*60*24*365*10)) //1*(1000*60*60*24*365)))
                 .signWith(SignatureAlgorithm.HS256, Secret.JWT_SECRET_KEY)
                 .compact();
     }
