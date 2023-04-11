@@ -39,3 +39,5 @@ out/
 Secret.java
 spring.log
 .log
+
+application-secret.properties
