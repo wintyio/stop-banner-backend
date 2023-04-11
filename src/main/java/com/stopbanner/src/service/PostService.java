@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.stopbanner.config.BaseResponseStatus.DATABASE_ERROR;
+import static com.stopbanner.config.BaseResponseStatus.USER_NOT_FOUND;
 
 @Slf4j
 @Service
@@ -31,6 +32,9 @@ public class PostService {
         try {
             Post post = new Post();
             post.setUser(userRepository.findBySub(sub));
+            if (post.getUser() == null) {
+                throw new BaseException(USER_NOT_FOUND);
+            }
             post.setImg(url);
             post.setLat(postCreateReq.getLat());
             post.setLng(postCreateReq.getLng());

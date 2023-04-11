@@ -26,7 +26,7 @@ public enum BaseResponseStatus {
     UNAUTHORIZED(false, 2005, "인증되지 않은 요청입니다."),
     FORBIDDEN(false, 2006, "권한이 없습니다."),
 
-    USER_NOT_FOUND(false, 2007, "토큰에 해당하는 유저를 찾을 수 없습니다."),
+    USER_NOT_FOUND(false, 2007, "유저를 찾을 수 없습니다."),
 
     INVALID_TOKEN(false, 2007, "유효하지 않은 토큰입니다."),
 
