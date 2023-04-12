@@ -15,10 +15,10 @@ public class Report {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "reportor_id")
-    private User reportor_id;
+    private User reportor;
     @ManyToOne
     @JoinColumn(name = "reported_id")
-    private User reported_id;
+    private User reported;
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
