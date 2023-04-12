@@ -1,14 +1,14 @@
 INSERT INTO user (NAME, ROLL, SUB, CREATE_DATE, IS_ACTIVE) VALUES ('박성욱', 'ROLE_USER', '1234', now(), 1);
 
 
-INSERT INTO city (ID, NAME) VALUES (1, '서울시');
-INSERT INTO city (ID, NAME) VALUES (2, '부산시');
-INSERT INTO city (ID, NAME) VALUES (3, '대구시');
-INSERT INTO city (ID, NAME) VALUES (4, '인천시');
-INSERT INTO city (ID, NAME) VALUES (5, '광주시');
-INSERT INTO city (ID, NAME) VALUES (6, '대전시');
-INSERT INTO city (ID, NAME) VALUES (7, '울산시');
-INSERT INTO city (ID, NAME) VALUES (8, '세종시');
+INSERT INTO city (ID, NAME) VALUES (1, '서울특별시');
+INSERT INTO city (ID, NAME) VALUES (2, '부산광역시');
+INSERT INTO city (ID, NAME) VALUES (3, '대구광역시');
+INSERT INTO city (ID, NAME) VALUES (4, '인천광역시');
+INSERT INTO city (ID, NAME) VALUES (5, '광주광역시');
+INSERT INTO city (ID, NAME) VALUES (6, '대전광역시');
+INSERT INTO city (ID, NAME) VALUES (7, '울산광역시');
+INSERT INTO city (ID, NAME) VALUES (8, '세종특별자치시');
 INSERT INTO city (ID, NAME) VALUES (9, '경기도');
 INSERT INTO city (ID, NAME) VALUES (10, '강원도');
 INSERT INTO city (ID, NAME) VALUES (11, '충천북도');
@@ -17,7 +17,7 @@ INSERT INTO city (ID, NAME) VALUES (13, '전라북도');
 INSERT INTO city (ID, NAME) VALUES (14, '전라남도');
 INSERT INTO city (ID, NAME) VALUES (15, '경상북도');
 INSERT INTO city (ID, NAME) VALUES (16, '경상남도');
-INSERT INTO city (ID, NAME) VALUES (17, '제주도');
+INSERT INTO city (ID, NAME) VALUES (17, '제주특별자치도');
 
 
 INSERT INTO local (NAME, CITY_ID) VALUES ('강남구', 1);
