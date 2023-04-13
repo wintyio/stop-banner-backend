@@ -12,10 +12,10 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ReportCreateReq {
-    @NotEmpty
-    private String reported_sub;
     @NotNull
     private Long post_id;
+    @NotNull
+    private String classification;
     @NotEmpty
     private String content;
 }

@@ -19,14 +19,12 @@ import java.time.LocalDateTime;
 public class ReportRes {
     private Long id;
     private String reportorSub;
-    private String reportedSub;
     private Long post_id;
     private String content;
     @Builder
     public ReportRes(Report report) {
         this.id = report.getId();
         this.reportorSub = report.getReportor().getSub();
-        this.reportedSub = report.getReported().getSub();
         this.post_id = report.getPost().getId();
         this.content = report.getContent();
     }

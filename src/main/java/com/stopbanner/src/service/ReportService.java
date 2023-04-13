@@ -26,7 +26,6 @@ import static com.stopbanner.config.BaseResponseStatus.USER_NOT_FOUND;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class ReportService {
     private final PostRepository postRepository;
     private final ReportRepository reportRepository;
@@ -37,10 +36,9 @@ public class ReportService {
         try {
             Report report = new Report();
             report.setReportor(userRepository.findBySub(sub));
-            report.setReported(userRepository.findBySub(reportCreateReq.getReported_sub()));
+            report.setPost(postRepository.getReferenceById(reportCreateReq.getPost_id()));
             report.setContent(reportCreateReq.getContent());
             report.setCreateDate(LocalDateTime.now());
-            report.setPost(postRepository.getReferenceById(reportCreateReq.getPost_id()));
             reportRepository.save(report);
             ReportCreateRes reportCreateRes = new ReportCreateRes(1L);
             return reportCreateRes;
