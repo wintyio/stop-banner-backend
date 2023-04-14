@@ -9,7 +9,7 @@ import com.stopbanner.src.model.Post.PostRes;
 import com.stopbanner.src.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Sort;
+import net.bytebuddy.asm.MemberRemoval;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,38 +24,22 @@ import static com.stopbanner.config.BaseResponseStatus.USER_NOT_FOUND;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class PostService {
+public class MemberService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-    private final CityRepository cityRepository;
-    private final MemberRepository memberRepository;
-    private final MemberService memberService;
     private final PartyRepository partyRepository;
+    private final MemberRepository memberRepository;
+    private final CityRepository cityRepository;
     private final LocalRepository localRepository;
-    public PostCreateRes createPost(PostCreateReq postCreateReq, String url, String sub) throws BaseException {
+    public void createMember(String name, Long post, Long party) throws BaseException {
         try {
-            Post post = new Post();
-            post.setUser(userRepository.findBySub(sub));
-            if (post.getUser() == null) {
-                throw new BaseException(USER_NOT_FOUND);
-            }
-            post.setImg(url);
-            post.setLat(postCreateReq.getLat());
-            post.setLng(postCreateReq.getLng());
-            post.setCity(cityRepository.getReferenceById(postCreateReq.getCityId()));
-            post.setLocal(localRepository.getReferenceById(postCreateReq.getLocalId()));
-            post.setAddress(postCreateReq.getAddress());
-            post.setCreateDate(LocalDateTime.now());
-            post.setLocal(localRepository.getReferenceById(postCreateReq.getLocalId()));
-            post.setIs_active(true);
-            postRepository.save(post);
-            for (int i=0; i<postCreateReq.getNames().size(); i++) {
-                memberService.createMember(postCreateReq.getNames().get(i), post.getId(), postCreateReq.getParties().get(i));
-            }
-            PostCreateRes postCreateRes = new PostCreateRes(1L);
-            return postCreateRes;
-        } catch (BaseException exception) {
-            throw exception;
+            System.out.println(name + " " + post + " " + party);
+            Member member = new Member();
+            member.setName(name);
+            member.setPost(postRepository.getReferenceById(post));
+            member.setParty(partyRepository.getReferenceById(party));
+            member.setCreateDate(LocalDateTime.now());
+            memberRepository.save(member);
         } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }

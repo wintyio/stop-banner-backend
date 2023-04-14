@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -41,12 +42,9 @@ public class PostController {
     public BaseResponse<PostCreateRes> create(@AuthenticationPrincipal SecurityUser securityUser,
                                               @Valid PostCreateReq postCreateReq) {
         try {
-            String url = s3Service.upload(postCreateReq.getImg());
-            return new BaseResponse<>(postService.createPost(postCreateReq, url, securityUser.getUser().getSub()));
+            return new BaseResponse<>(postService.createPost(postCreateReq, "dd", securityUser.getUser().getSub()));
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
-        } catch (IOException exception) {
-            return new BaseResponse<>(BaseResponseStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

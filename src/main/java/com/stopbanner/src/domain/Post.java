@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -28,7 +29,6 @@ public class Post {
     private String address;
     private LocalDateTime createDate;
     private Boolean is_active;
-
     public Post() {
 
     }
