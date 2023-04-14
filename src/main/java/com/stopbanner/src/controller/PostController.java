@@ -52,7 +52,7 @@ public class PostController {
     }
 
     @GetMapping("/get")
-    public BaseResponse<List<PostRes>> login() {
+    public BaseResponse<List<PostRes>> getPostResList() {
         try {
             return new BaseResponse<>(postService.findAll());
         } catch (BaseException exception) {

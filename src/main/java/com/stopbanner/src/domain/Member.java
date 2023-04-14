@@ -16,7 +16,7 @@ public class Member {
     @ManyToOne
     @JoinColumn(name = "party_id")
     private Party party;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
     private LocalDateTime createDate;

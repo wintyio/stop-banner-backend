@@ -33,13 +33,20 @@ public class MemberService {
     private final LocalRepository localRepository;
     public void createMember(String name, Long post, Long party) throws BaseException {
         try {
-            System.out.println(name + " " + post + " " + party);
             Member member = new Member();
             member.setName(name);
             member.setPost(postRepository.getReferenceById(post));
             member.setParty(partyRepository.getReferenceById(party));
             member.setCreateDate(LocalDateTime.now());
             memberRepository.save(member);
+        } catch (Exception exception) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public void findStatistics() throws BaseException {
+        try {
+
         } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }

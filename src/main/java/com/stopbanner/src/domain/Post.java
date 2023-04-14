@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -29,6 +30,9 @@ public class Post {
     private String address;
     private LocalDateTime createDate;
     private Boolean is_active;
+
+    @OneToMany(mappedBy = "post")
+    private List<Member> members;
     public Post() {
 
     }
