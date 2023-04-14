@@ -44,13 +44,4 @@ public class MemberService {
             throw new BaseException(DATABASE_ERROR);
         }
     }
-    public List<PostRes> findAll() throws BaseException {
-        try {
-            List<Post> list = postRepository.findAllByOrderByCreateDate();
-            return list.stream().map(PostRes::new).collect(Collectors.toList());
-        }
-        catch (Exception exception) {
-            throw new BaseException(DATABASE_ERROR);
-        }
-    }
 }

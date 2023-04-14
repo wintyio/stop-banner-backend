@@ -42,9 +42,12 @@ public class PostController {
     public BaseResponse<PostCreateRes> create(@AuthenticationPrincipal SecurityUser securityUser,
                                               @Valid PostCreateReq postCreateReq) {
         try {
-            return new BaseResponse<>(postService.createPost(postCreateReq, "dd", securityUser.getUser().getSub()));
+            String url = s3Service.upload(postCreateReq.getImg());
+            return new BaseResponse<>(postService.createPost(postCreateReq, url, securityUser.getUser().getSub()));
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
+        } catch (IOException exception) {
+            return new BaseResponse<>(BaseResponseStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
