@@ -15,9 +15,9 @@ public class PostCreateReq {
     @NotNull
     private MultipartFile img;
     @NotNull
-    private Long lat;
+    private Double lat;
     @NotNull
-    private Long lng;
+    private Double lng;
     @NotNull
     private Long cityId;
     @NotNull

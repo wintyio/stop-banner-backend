@@ -17,8 +17,8 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
     private String img;
-    private Long lat;
-    private Long lng;
+    private Double lat;
+    private Double lng;
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;

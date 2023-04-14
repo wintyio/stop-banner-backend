@@ -16,8 +16,8 @@ public class PostRes {
     private Long id;
     private String sub;
     private String img;
-    private Long lat;
-    private Long lng;
+    private Double lat;
+    private Double lng;
     private City city;
     private Local local;
     private String address;
