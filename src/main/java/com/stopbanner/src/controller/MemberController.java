@@ -2,6 +2,7 @@ package com.stopbanner.src.controller;
 
 import com.stopbanner.config.BaseException;
 import com.stopbanner.config.BaseResponse;
+import com.stopbanner.src.model.Member.GetRankPartyRes;
 import com.stopbanner.src.service.MemberService;
 import com.stopbanner.src.service.PostService;
 import com.stopbanner.src.service.S3Service;
@@ -34,7 +35,7 @@ public class MemberController {
     }
 
     @GetMapping("/get/rank/party")
-    public BaseResponse<List<Object[]>> getPostResList() {
+    public BaseResponse<List<GetRankPartyRes>> getPostResList() {
         try {
             return new BaseResponse<>(memberService.findRankParty());
         } catch (BaseException exception) {

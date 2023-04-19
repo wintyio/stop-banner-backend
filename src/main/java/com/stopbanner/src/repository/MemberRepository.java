@@ -9,6 +9,6 @@ import java.util.List;
 
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    @Query(value = "SELECT party_id, COUNT(*) AS count FROM member GROUP BY party_id", nativeQuery = true)
+    @Query(value = "SELECT party_id, COUNT(*) AS count FROM member GROUP BY party_id ORDER BY count DESC", nativeQuery = true)
     List<Object[]> findRankParty();
 }
