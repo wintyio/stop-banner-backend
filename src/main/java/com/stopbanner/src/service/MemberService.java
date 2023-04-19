@@ -2,23 +2,16 @@ package com.stopbanner.src.service;
 
 import com.stopbanner.config.BaseException;
 import com.stopbanner.src.domain.Member;
-import com.stopbanner.src.domain.Post;
-import com.stopbanner.src.model.Post.PostCreateReq;
-import com.stopbanner.src.model.Post.PostCreateRes;
-import com.stopbanner.src.model.Post.PostRes;
 import com.stopbanner.src.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.bytebuddy.asm.MemberRemoval;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.stopbanner.config.BaseResponseStatus.DATABASE_ERROR;
-import static com.stopbanner.config.BaseResponseStatus.USER_NOT_FOUND;
 
 @Slf4j
 @Service
@@ -44,9 +37,9 @@ public class MemberService {
         }
     }
 
-    public void findStatistics() throws BaseException {
+    public List<Object[]> findRankParty() throws BaseException {
         try {
-
+            return memberRepository.findRankParty();
         } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }
