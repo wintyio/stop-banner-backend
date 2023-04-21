@@ -20,9 +20,9 @@ public class Post {
     private String img;
     private Double lat;
     private Double lng;
-    @ManyToOne
-    @JoinColumn(name = "city_id")
-    private City city;
+    // @ManyToOne
+    // @JoinColumn(name = "city_id")
+    // private City city;
     @ManyToOne
     @JoinColumn(name = "local_id")
     private Local local;

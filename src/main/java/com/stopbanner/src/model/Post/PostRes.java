@@ -35,7 +35,7 @@ public class PostRes {
         this.img = post.getImg();
         this.lat = post.getLat();
         this.lng = post.getLng();
-        this.city = post.getCity();
+        // this.city = post.getCity();
         this.local = post.getLocal();
         this.address = post.getAddress();
         this.createDate = post.getCreateDate();

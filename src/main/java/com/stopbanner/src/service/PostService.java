@@ -39,7 +39,7 @@ public class PostService {
             post.setImg(url);
             post.setLat(postCreateReq.getLat());
             post.setLng(postCreateReq.getLng());
-            post.setCity(cityRepository.getReferenceById(postCreateReq.getCityId()));
+            // post.setCity(cityRepository.getReferenceById(postCreateReq.getCityId()));
             post.setLocal(localRepository.getReferenceById(postCreateReq.getLocalId()));
             post.setAddress(postCreateReq.getAddress());
             post.setCreateDate(LocalDateTime.now());
