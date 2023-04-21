@@ -5,6 +5,7 @@ import com.stopbanner.src.domain.Member;
 import com.stopbanner.src.domain.Post;
 import com.stopbanner.src.model.Post.PostCreateReq;
 import com.stopbanner.src.model.Post.PostCreateRes;
+import com.stopbanner.src.model.Post.PostGetReq;
 import com.stopbanner.src.model.Post.PostRes;
 import com.stopbanner.src.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -47,7 +48,7 @@ public class PostService {
             post.setAddress(postCreateReq.getAddress());
             post.setCreateDate(LocalDateTime.now());
             post.setLocal(localRepository.getReferenceById(postCreateReq.getLocalId()));
-            post.setIs_active(true);
+            post.setIsActive(true);
             postRepository.save(post);
             for (int i=0; i<postCreateReq.getNames().size(); i++) {
                 memberService.createMember(postCreateReq.getNames().get(i), post.getId(), postCreateReq.getParties().get(i));
@@ -60,9 +61,9 @@ public class PostService {
             throw new BaseException(DATABASE_ERROR);
         }
     }
-    public List<PostRes> findAll() throws BaseException {
+    public List<PostRes> findAll(PostGetReq postGetReq) throws BaseException {
         try {
-            List<Post> list = postRepository.findAllByOrderByCreateDate();
+            List<Post> list = postRepository.findTop20ByIdLessThanAndIsActiveTrueOrderByIdDesc(postGetReq.getId());
             return list.stream().map(PostRes::new).collect(Collectors.toList());
         }
         catch (Exception exception) {

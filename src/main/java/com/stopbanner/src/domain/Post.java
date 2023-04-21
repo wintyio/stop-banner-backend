@@ -29,7 +29,7 @@ public class Post {
     private Local local;
     private String address;
     private LocalDateTime createDate;
-    private Boolean is_active;
+    private Boolean isActive;
 
     @OneToMany(mappedBy = "post")
     private List<Member> members;

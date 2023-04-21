@@ -5,6 +5,7 @@ import com.stopbanner.config.BaseResponse;
 import com.stopbanner.config.BaseResponseStatus;
 import com.stopbanner.src.model.Post.PostCreateReq;
 import com.stopbanner.src.model.Post.PostCreateRes;
+import com.stopbanner.src.model.Post.PostGetReq;
 import com.stopbanner.src.model.Post.PostRes;
 import com.stopbanner.src.model.User.PostLoginRes;
 import com.stopbanner.src.security.SecurityUser;
@@ -52,9 +53,9 @@ public class PostController {
     }
 
     @GetMapping("/get")
-    public BaseResponse<List<PostRes>> getPostResList() {
+    public BaseResponse<List<PostRes>> getPostResList(@Valid @RequestBody PostGetReq PostGetReq) {
         try {
-            return new BaseResponse<>(postService.findAll());
+            return new BaseResponse<>(postService.findAll(PostGetReq));
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
