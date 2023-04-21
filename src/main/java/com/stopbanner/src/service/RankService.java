@@ -7,6 +7,7 @@ import com.stopbanner.src.model.Post.GetRankUserRes;
 import com.stopbanner.src.model.Post.PostCreateReq;
 import com.stopbanner.src.model.Post.PostCreateRes;
 import com.stopbanner.src.model.Post.PostRes;
+import com.stopbanner.src.model.Rank.GetRankNameRes;
 import com.stopbanner.src.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +46,15 @@ public class RankService {
         try {
             List<Object[]> objectsList = memberRepository.findRankParty();
             return objectsList.stream().map(GetRankPartyRes::new).collect(Collectors.toList());
+        } catch (Exception exception) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public List<GetRankNameRes> findRankName() throws BaseException {
+        try {
+            List<Object[]> objectsList = memberRepository.findRankName();
+            return objectsList.stream().map(GetRankNameRes::new).collect(Collectors.toList());
         } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }

@@ -4,6 +4,7 @@ import com.stopbanner.config.BaseException;
 import com.stopbanner.config.BaseResponse;
 import com.stopbanner.src.model.Member.GetRankPartyRes;
 import com.stopbanner.src.model.Post.GetRankUserRes;
+import com.stopbanner.src.model.Rank.GetRankNameRes;
 import com.stopbanner.src.service.PostService;
 import com.stopbanner.src.service.RankService;
 import com.stopbanner.src.service.S3Service;
@@ -43,11 +44,18 @@ public class RankController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
-
     @GetMapping("/get/party")
     public BaseResponse<List<GetRankPartyRes>> getRankPartyList() {
         try {
             return new BaseResponse<>(rankService.findRankParty());
+        } catch (BaseException exception) {
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+    @GetMapping("/get/name")
+    public BaseResponse<List<GetRankNameRes>> getRankNameList() {
+        try {
+            return new BaseResponse<>(rankService.findRankName());
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
