@@ -33,7 +33,7 @@ public class UserController {
         }
     }
 
-    @PostMapping ("/update/name")
+    @PutMapping ("/update/name")
     public BaseResponse<PostUpdateNameRes> updateName(@Valid @RequestBody PostUpdateNameReq postUpdateNameReq,
                                                         @AuthenticationPrincipal SecurityUser securityUser) {
         try {
