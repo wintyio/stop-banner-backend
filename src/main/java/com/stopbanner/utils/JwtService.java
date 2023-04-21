@@ -15,11 +15,6 @@ import java.util.Date;
 @Component
 public class JwtService {
 
-    /*
-    JWT 생성
-    @param userIdx
-    @return String
-     */
     public String createJwt(String sub) {
         Date now = new Date();
         return Jwts.builder()
@@ -31,22 +26,13 @@ public class JwtService {
                 .compact();
     }
 
-    /*
-    클라이언트로 부터 온 Header에서 X-ACCESS-TOKEN 으로 JWT 추출
-    @return String
-     */
     public String getJwt() {
         HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
         return request.getHeader("Authorization");
     }
 
-    /*
-    JWT에서 userIdx 추출
-    @return int
-    @throws BaseException
-     */
     public String getUserSub() throws BaseException {
-        //1. JWT 추출
+        // JWT 추출
         String accessToken = getJwt();
         if (accessToken == null || accessToken.length() == 0) {
             throw new BaseException(BaseResponseStatus.EMPTY_JWT);
@@ -57,7 +43,7 @@ public class JwtService {
             throw new BaseException(BaseResponseStatus.REQUEST_JWT_ERROR);
         }
 
-        // 2. JWT parsing
+        // JWT parsing
         Jws<Claims> claims;
         try {
             claims = Jwts.parser()
@@ -67,7 +53,7 @@ public class JwtService {
             throw new BaseException(BaseResponseStatus.INVALID_JWT);
         }
 
-        // 3. userIdx 추출
+        // userIdx 추출
         return claims.getBody().get("sub", String.class);  // jwt 에서 userIdx를 추출합니다.
     }
 }

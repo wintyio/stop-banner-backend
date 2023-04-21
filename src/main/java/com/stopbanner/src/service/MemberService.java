@@ -18,11 +18,8 @@ import static com.stopbanner.config.BaseResponseStatus.DATABASE_ERROR;
 @Transactional
 public class MemberService {
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
     private final PartyRepository partyRepository;
     private final MemberRepository memberRepository;
-    private final CityRepository cityRepository;
-    private final LocalRepository localRepository;
     public void createMember(String name, Long post, Long party) throws BaseException {
         try {
             Member member = new Member();

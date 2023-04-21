@@ -9,8 +9,6 @@ import com.stopbanner.src.model.User.PostUpdateNameRes;
 import com.stopbanner.src.security.SecurityUser;
 import lombok.extern.slf4j.Slf4j;
 import com.stopbanner.src.service.UserService;
-import com.stopbanner.utils.JwtService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,13 +18,9 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-
-    private final JwtService jwtService;
     private final UserService userService;
 
-    @Autowired
-    public UserController(JwtService jwtService, UserService userService) {
-        this.jwtService = jwtService;
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 

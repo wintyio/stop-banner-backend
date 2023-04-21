@@ -46,11 +46,6 @@ public enum BaseResponseStatus {
     POST_USERS_DISABLED_USER(false, 2020, "탈퇴한 회원입니다."),
 
 
-    // [POST] /order
-    POST_ORDER_EMPTY_RESTAURANTIDX(false, 2015, "음식점 idx를 입력해주세요."),
-    POST_ORDER_EMPTY_ORDERMENU(false, 2016, "메뉴를 입력해주세요."),
-
-
 
 
     /**
@@ -82,20 +77,14 @@ public enum BaseResponseStatus {
     PASSWORD_ENCRYPTION_ERROR(false, 4011, "비밀번호 암호화에 실패하였습니다."),
     PASSWORD_DECRYPTION_ERROR(false, 4012, "비밀번호 복호화에 실패하였습니다."),
 
-
-    // 5000 : 필요시 만들어서 쓰세요
-    // 6000 : 필요시 만들어서 쓰세요
-
     INTERNAL_SERVER_ERROR(false, 6000, "서버 오류");
     private final boolean isSuccess;
     private final int code;
     private final String message;
 
-    private BaseResponseStatus(boolean isSuccess, int code, String message) { //BaseResponseStatus 에서 각 해당하는 코드를 생성자로 맵핑
+    private BaseResponseStatus(boolean isSuccess, int code, String message) {
         this.isSuccess = isSuccess;
         this.code = code;
         this.message = message;
     }
-
-
 }

@@ -21,12 +21,7 @@ import static com.stopbanner.config.BaseResponseStatus.DATABASE_ERROR;
 @Transactional
 public class RankService {
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
-    private final CityRepository cityRepository;
     private final MemberRepository memberRepository;
-    private final MemberService memberService;
-    private final PartyRepository partyRepository;
-    private final LocalRepository localRepository;
     public List<GetRankUserRes> findRankUser() throws BaseException {
         try {
             List<Object[]> objectsList = postRepository.findRankUser();

@@ -1,7 +1,6 @@
 package com.stopbanner.src.service;
 
 import com.stopbanner.config.BaseException;
-import com.stopbanner.src.domain.Member;
 import com.stopbanner.src.domain.Post;
 import com.stopbanner.src.model.Post.PostCreateReq;
 import com.stopbanner.src.model.Post.PostCreateRes;
@@ -10,7 +9,6 @@ import com.stopbanner.src.model.Post.PostRes;
 import com.stopbanner.src.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,9 +27,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
     private final CityRepository cityRepository;
-    private final MemberRepository memberRepository;
     private final MemberService memberService;
-    private final PartyRepository partyRepository;
     private final LocalRepository localRepository;
     public PostCreateRes createPost(PostCreateReq postCreateReq, String url, String sub) throws BaseException {
         try {

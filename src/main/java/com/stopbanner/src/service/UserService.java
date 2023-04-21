@@ -1,12 +1,9 @@
 package com.stopbanner.src.service;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.stopbanner.config.BaseException;
 import com.stopbanner.src.domain.User;
-import com.stopbanner.src.model.User.PostLoginReq;
 import com.stopbanner.src.model.User.PostLoginRes;
 import com.stopbanner.src.model.User.PostUpdateNameReq;
 import com.stopbanner.src.model.User.PostUpdateNameRes;
@@ -15,7 +12,6 @@ import com.stopbanner.src.security.SecurityUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.stopbanner.utils.JwtService;
-import org.springframework.remoting.support.RemoteInvocationBasedExporter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +20,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 
 import static com.stopbanner.config.BaseResponseStatus.*;
 
@@ -34,9 +29,6 @@ import static com.stopbanner.config.BaseResponseStatus.*;
 public class UserService {
     private final JwtService jwtService;
     private final UserRepository userRepository;
-    private final SecurityUserDetailsService securityUserDetailsService;
-    private final PasswordEncoder bCryptPasswordEncoder;
-    private final PasswordEncoder passwordEncoder;
 
     public String loginSub(String sub) throws BaseException {
         try {

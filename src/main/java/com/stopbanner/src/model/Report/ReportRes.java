@@ -1,17 +1,10 @@
 package com.stopbanner.src.model.Report;
 
-import com.stopbanner.src.domain.City;
-import com.stopbanner.src.domain.Local;
-import com.stopbanner.src.domain.Post;
 import com.stopbanner.src.domain.Report;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
