@@ -46,11 +46,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     boolean chk(HttpServletRequest request)
             throws ServletException {
         String path = request.getRequestURI();
-        String[] exclude = {"/user/get", "/login/password", "/user/login", "/post/get"};
+        String[] exclude = {"/user/login", "/post/get"};
         for (String ex : exclude) {
             if (ex.equals(path)) return false;
         }
-        String[] exclude2 = {"/swagger-ui", "/swagger-resources", "/v3/api-docs"};
+        String[] exclude2 = {"/swagger-ui", "/swagger-resources", "/v3/api-docs", "/rank"};
         for (String ex : exclude2) {
             if (path.startsWith(ex)) return false;
         }
