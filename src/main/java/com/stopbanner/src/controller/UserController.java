@@ -4,10 +4,14 @@ import com.stopbanner.config.BaseException;
 import com.stopbanner.config.BaseResponse;
 import com.stopbanner.src.model.User.PostLoginReq;
 import com.stopbanner.src.model.User.PostLoginRes;
+import com.stopbanner.src.model.User.PostUpdateNameReq;
+import com.stopbanner.src.model.User.PostUpdateNameRes;
+import com.stopbanner.src.security.SecurityUser;
 import lombok.extern.slf4j.Slf4j;
 import com.stopbanner.src.service.UserService;
 import com.stopbanner.utils.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -27,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping ("/login")
-    public BaseResponse<PostLoginRes> google(@Valid @RequestBody PostLoginReq postLoginReq) {
+    public BaseResponse<PostLoginRes> login(@Valid @RequestBody PostLoginReq postLoginReq) {
         try {
             return new BaseResponse<>(userService.login(postLoginReq.getAccessToken()));
         } catch (BaseException exception) {
@@ -35,11 +39,11 @@ public class UserController {
         }
     }
 
-    @PostMapping ("/get")
-    public BaseResponse<PostLoginRes> login() {
+    @PostMapping ("/update/name")
+    public BaseResponse<PostUpdateNameRes> updateName(@Valid @RequestBody PostUpdateNameReq postUpdateNameReq,
+                                                        @AuthenticationPrincipal SecurityUser securityUser) {
         try {
-            PostLoginRes postLoginRes = new PostLoginRes(userService.loginSub("1234"));
-            return new BaseResponse<>(postLoginRes);
+            return new BaseResponse<>(userService.updateName(postUpdateNameReq, securityUser.getUser().getSub()));
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
