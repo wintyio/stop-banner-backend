@@ -33,13 +33,4 @@ public class MemberController {
         this.memberService = memberService;
         this.s3Service = s3Service;
     }
-
-    @GetMapping("/get/rank/party")
-    public BaseResponse<List<GetRankPartyRes>> getPostResList() {
-        try {
-            return new BaseResponse<>(memberService.findRankParty());
-        } catch (BaseException exception) {
-            return new BaseResponse<>((exception.getStatus()));
-        }
-    }
 }

@@ -40,13 +40,4 @@ public class MemberService {
             throw new BaseException(DATABASE_ERROR);
         }
     }
-
-    public List<GetRankPartyRes> findRankParty() throws BaseException {
-        try {
-            List<Object[]> objectsList = memberRepository.findRankParty();
-            return objectsList.stream().map(GetRankPartyRes::new).collect(Collectors.toList());
-        } catch (Exception exception) {
-            throw new BaseException(DATABASE_ERROR);
-        }
-    }
 }

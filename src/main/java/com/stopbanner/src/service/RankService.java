@@ -2,6 +2,7 @@ package com.stopbanner.src.service;
 
 import com.stopbanner.config.BaseException;
 import com.stopbanner.src.domain.Post;
+import com.stopbanner.src.model.Member.GetRankPartyRes;
 import com.stopbanner.src.model.Post.GetRankUserRes;
 import com.stopbanner.src.model.Post.PostCreateReq;
 import com.stopbanner.src.model.Post.PostCreateRes;
@@ -31,10 +32,19 @@ public class RankService {
     private final MemberService memberService;
     private final PartyRepository partyRepository;
     private final LocalRepository localRepository;
-    public List<GetRankUserRes> findRankParty() throws BaseException {
+    public List<GetRankUserRes> findRankUser() throws BaseException {
         try {
             List<Object[]> objectsList = postRepository.findRankUser();
             return objectsList.stream().map(GetRankUserRes::new).collect(Collectors.toList());
+        } catch (Exception exception) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public List<GetRankPartyRes> findRankParty() throws BaseException {
+        try {
+            List<Object[]> objectsList = memberRepository.findRankParty();
+            return objectsList.stream().map(GetRankPartyRes::new).collect(Collectors.toList());
         } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }
