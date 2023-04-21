@@ -1,4 +1,4 @@
-package com.stopbanner.src.model.Member;
+package com.stopbanner.src.model.Rank;
 
 import com.stopbanner.src.domain.Report;
 import lombok.*;

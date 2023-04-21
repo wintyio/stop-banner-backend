@@ -2,9 +2,6 @@ package com.stopbanner.src.service;
 
 import com.stopbanner.config.BaseException;
 import com.stopbanner.src.domain.Member;
-import com.stopbanner.src.domain.Report;
-import com.stopbanner.src.model.Member.GetRankPartyRes;
-import com.stopbanner.src.model.Report.ReportRes;
 import com.stopbanner.src.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,8 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.stopbanner.config.BaseResponseStatus.DATABASE_ERROR;
 

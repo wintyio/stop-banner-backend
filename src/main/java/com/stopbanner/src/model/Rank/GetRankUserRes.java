@@ -1,4 +1,4 @@
-package com.stopbanner.src.model.Post;
+package com.stopbanner.src.model.Rank;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
