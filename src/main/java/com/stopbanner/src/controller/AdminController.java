@@ -4,11 +4,9 @@ import com.stopbanner.config.BaseException;
 import com.stopbanner.config.BaseResponse;
 import com.stopbanner.src.model.Admin.PutActiveReq;
 import com.stopbanner.src.model.Admin.PutActiveRes;
-import com.stopbanner.src.security.SecurityUser;
 import com.stopbanner.src.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +24,7 @@ public class AdminController {
 
     @Secured("ROLE_ADMIN")
     @PutMapping("/active")
-    public BaseResponse<PutActiveRes> updateName(@Valid @RequestBody PutActiveReq putActiveReq) {
+    public BaseResponse<PutActiveRes> putActive(@Valid @RequestBody PutActiveReq putActiveReq) {
         try {
             return new BaseResponse<>(userService.updateActive(putActiveReq));
         } catch (BaseException exception) {
