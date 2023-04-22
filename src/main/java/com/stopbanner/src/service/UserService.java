@@ -4,9 +4,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.stopbanner.config.BaseException;
 import com.stopbanner.src.domain.User;
-import com.stopbanner.src.model.User.PostLoginRes;
-import com.stopbanner.src.model.User.PutNameReq;
-import com.stopbanner.src.model.User.PutNameRes;
+import com.stopbanner.src.model.Admin.PutActiveReq;
+import com.stopbanner.src.model.Admin.PutActiveRes;
+import com.stopbanner.src.model.User.*;
 import com.stopbanner.src.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -78,10 +78,10 @@ public class UserService {
                 user.setName("사용자");
                 user.setRoll("ROLE_USER");
                 user.setCreateDate(LocalDateTime.now());
-                user.setIs_active(true);
+                user.setActive(true);
                 userRepository.save(user);
             }
-            if (user.getIs_active() == false) {
+            if (user.getActive() == false) {
                 throw new BaseException(DISABLED_USER);
             }
             PostLoginRes postLoginRes = new PostLoginRes();
@@ -99,6 +99,18 @@ public class UserService {
             user.setName(putNameReq.getName());
             userRepository.save(user);
             return new PutNameRes(1L);
+        } catch (Exception e) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public PutActiveRes updateActive(PutActiveReq putActiveReq) throws BaseException {
+        try {
+            User user = userRepository.findBySub(putActiveReq.getSub());
+            if (user == null) throw new BaseException(USER_NOT_FOUND);
+            user.setActive(putActiveReq.getActive());
+            userRepository.save(user);
+            return new PutActiveRes(1L);
         } catch (Exception e) {
             throw new BaseException(DATABASE_ERROR);
         }

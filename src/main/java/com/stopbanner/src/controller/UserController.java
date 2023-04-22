@@ -2,13 +2,11 @@ package com.stopbanner.src.controller;
 
 import com.stopbanner.config.BaseException;
 import com.stopbanner.config.BaseResponse;
-import com.stopbanner.src.model.User.PostLoginReq;
-import com.stopbanner.src.model.User.PostLoginRes;
-import com.stopbanner.src.model.User.PutNameReq;
-import com.stopbanner.src.model.User.PutNameRes;
+import com.stopbanner.src.model.User.*;
 import com.stopbanner.src.security.SecurityUser;
 import lombok.extern.slf4j.Slf4j;
 import com.stopbanner.src.service.UserService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
