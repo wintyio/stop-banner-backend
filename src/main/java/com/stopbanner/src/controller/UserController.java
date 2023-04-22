@@ -4,8 +4,8 @@ import com.stopbanner.config.BaseException;
 import com.stopbanner.config.BaseResponse;
 import com.stopbanner.src.model.User.PostLoginReq;
 import com.stopbanner.src.model.User.PostLoginRes;
-import com.stopbanner.src.model.User.PostUpdateNameReq;
-import com.stopbanner.src.model.User.PostUpdateNameRes;
+import com.stopbanner.src.model.User.PutNameReq;
+import com.stopbanner.src.model.User.PutNameRes;
 import com.stopbanner.src.security.SecurityUser;
 import lombok.extern.slf4j.Slf4j;
 import com.stopbanner.src.service.UserService;
@@ -33,11 +33,11 @@ public class UserController {
         }
     }
 
-    @PutMapping ("/update/name")
-    public BaseResponse<PostUpdateNameRes> updateName(@Valid @RequestBody PostUpdateNameReq postUpdateNameReq,
-                                                        @AuthenticationPrincipal SecurityUser securityUser) {
+    @PutMapping ("/name")
+    public BaseResponse<PutNameRes> updateName(@Valid @RequestBody PutNameReq putNameReq,
+                                               @AuthenticationPrincipal SecurityUser securityUser) {
         try {
-            return new BaseResponse<>(userService.updateName(postUpdateNameReq, securityUser.getUser().getSub()));
+            return new BaseResponse<>(userService.updateName(putNameReq, securityUser.getUser().getSub()));
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }

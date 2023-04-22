@@ -5,14 +5,12 @@ import com.google.gson.JsonParser;
 import com.stopbanner.config.BaseException;
 import com.stopbanner.src.domain.User;
 import com.stopbanner.src.model.User.PostLoginRes;
-import com.stopbanner.src.model.User.PostUpdateNameReq;
-import com.stopbanner.src.model.User.PostUpdateNameRes;
+import com.stopbanner.src.model.User.PutNameReq;
+import com.stopbanner.src.model.User.PutNameRes;
 import com.stopbanner.src.repository.UserRepository;
-import com.stopbanner.src.security.SecurityUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.stopbanner.utils.JwtService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -94,13 +92,13 @@ public class UserService {
         }
     }
 
-    public PostUpdateNameRes updateName(PostUpdateNameReq postUpdateNameReq, String sub) throws BaseException {
+    public PutNameRes updateName(PutNameReq putNameReq, String sub) throws BaseException {
         try {
             User user = userRepository.findBySub(sub);
             if (user == null) throw new BaseException(USER_NOT_FOUND);
-            user.setName(postUpdateNameReq.getName());
+            user.setName(putNameReq.getName());
             userRepository.save(user);
-            return new PostUpdateNameRes(1L);
+            return new PutNameRes(1L);
         } catch (Exception e) {
             throw new BaseException(DATABASE_ERROR);
         }
