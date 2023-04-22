@@ -10,6 +10,7 @@ import com.stopbanner.src.model.Forum.GetForumRes;
 import com.stopbanner.src.security.SecurityUser;
 import com.stopbanner.src.service.ForumService;
 import com.stopbanner.src.service.S3Service;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,7 @@ public class ForumController {
     }
 
     @PostMapping("")
+    @ApiOperation(value = "게시글 작성", notes = "게시글을 작성한다.")
     public BaseResponse<PostForumRes> postForum(@AuthenticationPrincipal SecurityUser securityUser,
                                                 @Valid PostForumReq postForumReq) {
         try {
@@ -44,6 +46,7 @@ public class ForumController {
     }
 
     @GetMapping ("")
+    @ApiOperation(value = "게시글 조회", notes = "x보다 id가 작은 게시글 중에서 id가 제일 큰 20개 게시글을 조회한다.")
     public BaseResponse<List<GetForumRes>> getForum(@Valid GetForumReq getForumReq) {
         try {
             return new BaseResponse<>(forumService.findAll(getForumReq));

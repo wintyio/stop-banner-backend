@@ -4,6 +4,7 @@ import com.stopbanner.config.BaseException;
 import com.stopbanner.config.BaseResponse;
 import com.stopbanner.src.model.User.*;
 import com.stopbanner.src.security.SecurityUser;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import com.stopbanner.src.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,6 +23,7 @@ public class UserController {
     }
 
     @PostMapping ("/login")
+    @ApiOperation(value = "유저 로그인", notes = "유저 로그인 한다.")
     public BaseResponse<PostUserLoginRes> postLogin(@Valid @RequestBody PostUserLoginReq postUserLoginReq) {
         try {
             return new BaseResponse<>(userService.login(postUserLoginReq.getAccessToken()));
@@ -31,6 +33,7 @@ public class UserController {
     }
 
     @PatchMapping ("/name")
+    @ApiOperation(value = "유저 이름 변경", notes = "유저 이름을 변경한다.")
     public BaseResponse<PatchUserNameRes> patchName(@Valid @RequestBody PatchUserNameReq patchUserNameReq,
                                                   @AuthenticationPrincipal SecurityUser securityUser) {
         try {

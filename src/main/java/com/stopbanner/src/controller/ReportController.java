@@ -7,7 +7,9 @@ import com.stopbanner.src.model.Report.PostReportRes;
 import com.stopbanner.src.model.Report.GetReportRes;
 import com.stopbanner.src.security.SecurityUser;
 import com.stopbanner.src.service.ReportService;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +28,7 @@ public class ReportController {
 
 
     @PostMapping("")
+    @ApiOperation(value = "신고 작성", notes = "게시글을 신고한다.")
     public BaseResponse<PostReportRes> postReport(@AuthenticationPrincipal SecurityUser securityUser,
                                                   @Valid @RequestBody PostReportReq postReportReq) {
         try {
@@ -35,9 +38,9 @@ public class ReportController {
         }
     }
 
-
-    // @Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     @GetMapping("")
+    @ApiOperation(value = "신고 조회", notes = "신고 목록을 조회한다.")
     public BaseResponse<List<GetReportRes>> getReport() {
         try {
             return new BaseResponse<>(reportService.findAll());
