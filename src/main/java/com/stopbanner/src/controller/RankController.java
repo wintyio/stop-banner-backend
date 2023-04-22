@@ -23,24 +23,24 @@ public class RankController {
         this.rankService = rankService;
     }
 
-    @GetMapping("/get/user")
-    public BaseResponse<List<GetRankUserRes>> getRankUserList() {
+    @GetMapping("/user")
+    public BaseResponse<List<GetRankUserRes>> getUser() {
         try {
             return new BaseResponse<>(rankService.findRankUser());
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
-    @GetMapping("/get/party")
-    public BaseResponse<List<GetRankPartyRes>> getRankPartyList() {
+    @GetMapping("/party")
+    public BaseResponse<List<GetRankPartyRes>> getParty() {
         try {
             return new BaseResponse<>(rankService.findRankParty());
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
-    @GetMapping("/get/name")
-    public BaseResponse<List<GetRankNameRes>> getRankNameList() {
+    @GetMapping("/name")
+    public BaseResponse<List<GetRankNameRes>> getName() {
         try {
             return new BaseResponse<>(rankService.findRankName());
         } catch (BaseException exception) {
