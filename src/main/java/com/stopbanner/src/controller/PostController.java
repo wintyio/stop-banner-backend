@@ -43,8 +43,8 @@ public class PostController {
         }
     }
 
-    @PostMapping("/get")
-    public BaseResponse<List<PostRes>> getPostResList(@Valid @RequestBody PostGetReq postGetReq) {
+    @GetMapping ("/get")
+    public BaseResponse<List<PostRes>> getPostResList(@Valid PostGetReq postGetReq) {
         try {
             return new BaseResponse<>(postService.findAll(postGetReq));
         } catch (BaseException exception) {
