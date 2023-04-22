@@ -13,7 +13,7 @@ import java.util.List;
 @Slf4j
 @RestController
 public class TestController {
-    @GetMapping("/")
+    @GetMapping("/test")
     public String getChk() {
         return "1";
     }
