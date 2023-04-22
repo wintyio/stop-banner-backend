@@ -30,11 +30,11 @@ public class UserController {
         }
     }
 
-    @PutMapping ("/name")
-    public BaseResponse<PutUserNameRes> putName(@Valid @RequestBody PutUserNameReq putUserNameReq,
-                                                @AuthenticationPrincipal SecurityUser securityUser) {
+    @PatchMapping ("/name")
+    public BaseResponse<PatchUserNameRes> patchName(@Valid @RequestBody PatchUserNameReq patchUserNameReq,
+                                                  @AuthenticationPrincipal SecurityUser securityUser) {
         try {
-            return new BaseResponse<>(userService.updateName(putUserNameReq, securityUser.getUser().getSub()));
+            return new BaseResponse<>(userService.updateName(patchUserNameReq, securityUser.getUser().getSub()));
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }

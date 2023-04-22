@@ -4,8 +4,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.stopbanner.config.BaseException;
 import com.stopbanner.src.domain.User;
-import com.stopbanner.src.model.Admin.PutAdminActiveReq;
-import com.stopbanner.src.model.Admin.PutAdminActiveRes;
+import com.stopbanner.src.model.Admin.PatchAdminActiveReq;
+import com.stopbanner.src.model.Admin.PatchAdminActiveRes;
 import com.stopbanner.src.model.User.*;
 import com.stopbanner.src.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -92,25 +92,25 @@ public class UserService {
         }
     }
 
-    public PutUserNameRes updateName(PutUserNameReq putUserNameReq, String sub) throws BaseException {
+    public PatchUserNameRes updateName(PatchUserNameReq patchUserNameReq, String sub) throws BaseException {
         try {
             User user = userRepository.findBySub(sub);
             if (user == null) throw new BaseException(USER_NOT_FOUND);
-            user.setName(putUserNameReq.getName());
+            user.setName(patchUserNameReq.getName());
             userRepository.save(user);
-            return new PutUserNameRes(1L);
+            return new PatchUserNameRes(1L);
         } catch (Exception e) {
             throw new BaseException(DATABASE_ERROR);
         }
     }
 
-    public PutAdminActiveRes updateActive(PutAdminActiveReq putAdminActiveReq) throws BaseException {
+    public PatchAdminActiveRes updateActive(PatchAdminActiveReq patchAdminActiveReq) throws BaseException {
         try {
-            User user = userRepository.findBySub(putAdminActiveReq.getSub());
+            User user = userRepository.findBySub(patchAdminActiveReq.getSub());
             if (user == null) throw new BaseException(USER_NOT_FOUND);
-            user.setActive(putAdminActiveReq.getActive());
+            user.setActive(patchAdminActiveReq.getActive());
             userRepository.save(user);
-            return new PutAdminActiveRes(1L);
+            return new PatchAdminActiveRes(1L);
         } catch (Exception e) {
             throw new BaseException(DATABASE_ERROR);
         }

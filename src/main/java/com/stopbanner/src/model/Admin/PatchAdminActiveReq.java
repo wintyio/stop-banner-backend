@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PutAdminActiveReq {
+public class PatchAdminActiveReq {
     @NotEmpty
     private String sub;
     @NotNull

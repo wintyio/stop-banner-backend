@@ -2,15 +2,12 @@ package com.stopbanner.src.controller;
 
 import com.stopbanner.config.BaseException;
 import com.stopbanner.config.BaseResponse;
-import com.stopbanner.src.model.Admin.PutAdminActiveReq;
-import com.stopbanner.src.model.Admin.PutAdminActiveRes;
+import com.stopbanner.src.model.Admin.PatchAdminActiveReq;
+import com.stopbanner.src.model.Admin.PatchAdminActiveRes;
 import com.stopbanner.src.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 @Slf4j
@@ -23,10 +20,10 @@ public class AdminController {
     }
 
     @Secured("ROLE_ADMIN")
-    @PutMapping("/active")
-    public BaseResponse<PutAdminActiveRes> putActive(@Valid @RequestBody PutAdminActiveReq putAdminActiveReq) {
+    @PatchMapping ("/active")
+    public BaseResponse<PatchAdminActiveRes> patchActive(@Valid @RequestBody PatchAdminActiveReq patchAdminActiveReq) {
         try {
-            return new BaseResponse<>(userService.updateActive(putAdminActiveReq));
+            return new BaseResponse<>(userService.updateActive(patchAdminActiveReq));
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }

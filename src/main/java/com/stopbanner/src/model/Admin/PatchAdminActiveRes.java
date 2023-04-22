@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PutAdminActiveRes {
+public class PatchAdminActiveRes {
     private Long status;
 }
