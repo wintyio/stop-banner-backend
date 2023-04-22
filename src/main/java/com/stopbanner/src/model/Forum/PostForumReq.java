@@ -1,4 +1,4 @@
-package com.stopbanner.src.model.Post;
+package com.stopbanner.src.model.Forum;
 
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PostCreateReq {
+public class PostForumReq {
     @NotNull
     private MultipartFile img;
     @NotNull

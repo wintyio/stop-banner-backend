@@ -18,7 +18,7 @@ public class Member {
     private Party party;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
-    private Post post;
+    private Forum forum;
     private LocalDateTime createDate;
     public Member() {
 

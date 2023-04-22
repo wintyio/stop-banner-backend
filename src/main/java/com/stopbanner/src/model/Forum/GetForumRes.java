@@ -1,4 +1,4 @@
-package com.stopbanner.src.model.Post;
+package com.stopbanner.src.model.Forum;
 
 import com.stopbanner.src.domain.*;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @Slf4j
-public class PostRes {
+public class GetForumRes {
     private Long id;
     private String sub;
     private String img;
@@ -29,22 +28,22 @@ public class PostRes {
     private List<Long> parties = new ArrayList<>();
     private LocalDateTime createDate;
     @Builder
-    public PostRes(Post post){
-        this.id = post.getId();
-        this.sub = post.getUser().getSub();
-        this.img = post.getImg();
-        this.lat = post.getLat();
-        this.lng = post.getLng();
+    public GetForumRes(Forum forum){
+        this.id = forum.getId();
+        this.sub = forum.getUser().getSub();
+        this.img = forum.getImg();
+        this.lat = forum.getLat();
+        this.lng = forum.getLng();
         // this.city = post.getCity();
-        this.local = post.getLocal();
-        this.address = post.getAddress();
-        this.createDate = post.getCreateDate();
-        for (Member member : post.getMembers()) {
+        this.local = forum.getLocal();
+        this.address = forum.getAddress();
+        this.createDate = forum.getCreateDate();
+        for (Member member : forum.getMembers()) {
             this.names.add(member.getName());
             this.parties.add(member.getParty().getId());
         }
     }
-    public PostRes() {
+    public GetForumRes() {
 
     }
 }

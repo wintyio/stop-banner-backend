@@ -6,7 +6,6 @@ import com.stopbanner.src.model.User.*;
 import com.stopbanner.src.security.SecurityUser;
 import lombok.extern.slf4j.Slf4j;
 import com.stopbanner.src.service.UserService;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,19 +22,19 @@ public class UserController {
     }
 
     @PostMapping ("/login")
-    public BaseResponse<PostLoginRes> login(@Valid @RequestBody PostLoginReq postLoginReq) {
+    public BaseResponse<PostUserLoginRes> postLogin(@Valid @RequestBody PostUserLoginReq postUserLoginReq) {
         try {
-            return new BaseResponse<>(userService.login(postLoginReq.getAccessToken()));
+            return new BaseResponse<>(userService.login(postUserLoginReq.getAccessToken()));
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
 
     @PutMapping ("/name")
-    public BaseResponse<PutNameRes> updateName(@Valid @RequestBody PutNameReq putNameReq,
-                                               @AuthenticationPrincipal SecurityUser securityUser) {
+    public BaseResponse<PutUserNameRes> putName(@Valid @RequestBody PutUserNameReq putUserNameReq,
+                                                @AuthenticationPrincipal SecurityUser securityUser) {
         try {
-            return new BaseResponse<>(userService.updateName(putNameReq, securityUser.getUser().getSub()));
+            return new BaseResponse<>(userService.updateName(putUserNameReq, securityUser.getUser().getSub()));
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }

@@ -4,8 +4,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.stopbanner.config.BaseException;
 import com.stopbanner.src.domain.User;
-import com.stopbanner.src.model.Admin.PutActiveReq;
-import com.stopbanner.src.model.Admin.PutActiveRes;
+import com.stopbanner.src.model.Admin.PutAdminActiveReq;
+import com.stopbanner.src.model.Admin.PutAdminActiveRes;
 import com.stopbanner.src.model.User.*;
 import com.stopbanner.src.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +37,7 @@ public class UserService {
         }
     }
 
-    public PostLoginRes login(String accessToken) throws BaseException {
+    public PostUserLoginRes login(String accessToken) throws BaseException {
         String sub = null;
         String requestURL = "https://kapi.kakao.com/v2/user/me";
 
@@ -84,33 +84,33 @@ public class UserService {
             if (user.getActive() == false) {
                 throw new BaseException(DISABLED_USER);
             }
-            PostLoginRes postLoginRes = new PostLoginRes();
-            postLoginRes.setToken(jwtService.createJwt(user.getSub()));
-            return postLoginRes;
+            PostUserLoginRes postUserLoginRes = new PostUserLoginRes();
+            postUserLoginRes.setToken(jwtService.createJwt(user.getSub()));
+            return postUserLoginRes;
         } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }
     }
 
-    public PutNameRes updateName(PutNameReq putNameReq, String sub) throws BaseException {
+    public PutUserNameRes updateName(PutUserNameReq putUserNameReq, String sub) throws BaseException {
         try {
             User user = userRepository.findBySub(sub);
             if (user == null) throw new BaseException(USER_NOT_FOUND);
-            user.setName(putNameReq.getName());
+            user.setName(putUserNameReq.getName());
             userRepository.save(user);
-            return new PutNameRes(1L);
+            return new PutUserNameRes(1L);
         } catch (Exception e) {
             throw new BaseException(DATABASE_ERROR);
         }
     }
 
-    public PutActiveRes updateActive(PutActiveReq putActiveReq) throws BaseException {
+    public PutAdminActiveRes updateActive(PutAdminActiveReq putAdminActiveReq) throws BaseException {
         try {
-            User user = userRepository.findBySub(putActiveReq.getSub());
+            User user = userRepository.findBySub(putAdminActiveReq.getSub());
             if (user == null) throw new BaseException(USER_NOT_FOUND);
-            user.setActive(putActiveReq.getActive());
+            user.setActive(putAdminActiveReq.getActive());
             userRepository.save(user);
-            return new PutActiveRes(1L);
+            return new PutAdminActiveRes(1L);
         } catch (Exception e) {
             throw new BaseException(DATABASE_ERROR);
         }

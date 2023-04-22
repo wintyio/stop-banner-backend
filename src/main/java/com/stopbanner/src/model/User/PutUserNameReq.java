@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PutNameReq {
+public class PutUserNameReq {
     @NotEmpty
     private String name;
 }

@@ -1,17 +1,20 @@
-package com.stopbanner.src.model.Admin;
+package com.stopbanner.src.model.Report;
 
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PutActiveReq {
-    @NotEmpty
-    private String sub;
+public class PostReportReq {
     @NotNull
-    private Boolean active;
+    private Long forum_id;
+    @NotNull
+    private String classification;
+    @NotEmpty
+    private String content;
 }

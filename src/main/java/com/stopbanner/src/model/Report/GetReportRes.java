@@ -9,19 +9,19 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ReportRes {
+public class GetReportRes {
     private Long id;
     private String reportorSub;
     private Long post_id;
     private String content;
     @Builder
-    public ReportRes(Report report) {
+    public GetReportRes(Report report) {
         this.id = report.getId();
         this.reportorSub = report.getReportor().getSub();
-        this.post_id = report.getPost().getId();
+        this.post_id = report.getForum().getId();
         this.content = report.getContent();
     }
-    public ReportRes() {
+    public GetReportRes() {
 
     }
 }
