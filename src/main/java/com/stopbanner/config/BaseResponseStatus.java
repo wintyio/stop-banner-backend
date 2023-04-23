@@ -45,6 +45,9 @@ public enum BaseResponseStatus {
     // Log-in
     POST_USERS_DISABLED_USER(false, 2020, "탈퇴한 회원입니다."),
 
+    // File
+    INVALID_EXT(false, 2021, "지원하지 않는 확장자입니다."),
+
 
 
 
