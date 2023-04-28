@@ -34,7 +34,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String path = request.getRequestURI();
-        String[] exclude = {"/user/login", "/post/get"};
+        String[] exclude = {"/user/login", "/forum"};
         for (String ex : exclude) {
             if (ex.equals(path)) return true;
         }
