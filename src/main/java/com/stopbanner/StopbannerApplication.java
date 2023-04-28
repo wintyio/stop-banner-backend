@@ -1,6 +1,5 @@
 package com.stopbanner;
 
-import com.amazonaws.HttpMethod;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +20,7 @@ public class StopbannerApplication {
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
 						.allowedMethods("*")
-						.allowedOrigins("http://localhost:3000")
+						.allowedOrigins("http://localhost:3000", "http://localhost:8000", "https://api.bannerhunter.kr")
 						.allowedHeaders("*")
 						.allowCredentials(true);
 			}
