@@ -1,4 +1,4 @@
-package com.stopbanner.src.model.Post;
+package com.stopbanner.src.model.Forum;
 
 import lombok.*;
 import javax.validation.constraints.NotNull;
@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PostGetReq {
+public class GetForumReq {
     @NotNull
     private Long id;
 }

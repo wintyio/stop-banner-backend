@@ -18,7 +18,7 @@ public class Report {
     private User reportor;
     @ManyToOne
     @JoinColumn(name = "post_id")
-    private Post post;
+    private Forum forum;
     private String content;
     private String classification;
     private LocalDateTime createDate;

@@ -1,12 +1,14 @@
-package com.stopbanner.src.model.Report;
+package com.stopbanner.src.model.Admin;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class ReportCreateRes {
+@NoArgsConstructor
+public class PatchAdminActiveRes {
     private Long status;
 }

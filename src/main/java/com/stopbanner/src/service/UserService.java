@@ -4,15 +4,13 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.stopbanner.config.BaseException;
 import com.stopbanner.src.domain.User;
-import com.stopbanner.src.model.User.PostLoginRes;
-import com.stopbanner.src.model.User.PostUpdateNameReq;
-import com.stopbanner.src.model.User.PostUpdateNameRes;
+import com.stopbanner.src.model.Admin.PatchAdminActiveReq;
+import com.stopbanner.src.model.Admin.PatchAdminActiveRes;
+import com.stopbanner.src.model.User.*;
 import com.stopbanner.src.repository.UserRepository;
-import com.stopbanner.src.security.SecurityUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.stopbanner.utils.JwtService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -39,7 +37,7 @@ public class UserService {
         }
     }
 
-    public PostLoginRes login(String accessToken) throws BaseException {
+    public PostUserLoginRes login(String accessToken) throws BaseException {
         String sub = null;
         String requestURL = "https://kapi.kakao.com/v2/user/me";
 
@@ -80,27 +78,39 @@ public class UserService {
                 user.setName("사용자");
                 user.setRoll("ROLE_USER");
                 user.setCreateDate(LocalDateTime.now());
-                user.setIs_active(true);
+                user.setActive(true);
                 userRepository.save(user);
             }
-            if (user.getIs_active() == false) {
+            if (user.getActive() == false) {
                 throw new BaseException(DISABLED_USER);
             }
-            PostLoginRes postLoginRes = new PostLoginRes();
-            postLoginRes.setToken(jwtService.createJwt(user.getSub()));
-            return postLoginRes;
+            PostUserLoginRes postUserLoginRes = new PostUserLoginRes();
+            postUserLoginRes.setToken(jwtService.createJwt(user.getSub()));
+            return postUserLoginRes;
         } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }
     }
 
-    public PostUpdateNameRes updateName(PostUpdateNameReq postUpdateNameReq, String sub) throws BaseException {
+    public PatchUserNameRes updateName(PatchUserNameReq patchUserNameReq, String sub) throws BaseException {
         try {
             User user = userRepository.findBySub(sub);
             if (user == null) throw new BaseException(USER_NOT_FOUND);
-            user.setName(postUpdateNameReq.getName());
+            user.setName(patchUserNameReq.getName());
             userRepository.save(user);
-            return new PostUpdateNameRes(1L);
+            return new PatchUserNameRes(1L);
+        } catch (Exception e) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public PatchAdminActiveRes updateActive(PatchAdminActiveReq patchAdminActiveReq) throws BaseException {
+        try {
+            User user = userRepository.findBySub(patchAdminActiveReq.getSub());
+            if (user == null) throw new BaseException(USER_NOT_FOUND);
+            user.setActive(patchAdminActiveReq.getActive());
+            userRepository.save(user);
+            return new PatchAdminActiveRes(1L);
         } catch (Exception e) {
             throw new BaseException(DATABASE_ERROR);
         }

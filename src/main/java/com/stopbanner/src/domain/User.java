@@ -17,7 +17,7 @@ public class User {
     private String name;
     private String roll;
     private LocalDateTime createDate;
-    private Boolean is_active;
+    private Boolean active;
     public User() {
 
     }

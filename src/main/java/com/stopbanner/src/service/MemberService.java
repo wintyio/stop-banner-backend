@@ -17,14 +17,14 @@ import static com.stopbanner.config.BaseResponseStatus.DATABASE_ERROR;
 @RequiredArgsConstructor
 @Transactional
 public class MemberService {
-    private final PostRepository postRepository;
+    private final ForumRepository forumRepository;
     private final PartyRepository partyRepository;
     private final MemberRepository memberRepository;
     public void createMember(String name, Long post, Long party) throws BaseException {
         try {
             Member member = new Member();
             member.setName(name);
-            member.setPost(postRepository.getReferenceById(post));
+            member.setForum(forumRepository.getReferenceById(post));
             member.setParty(partyRepository.getReferenceById(party));
             member.setCreateDate(LocalDateTime.now());
             memberRepository.save(member);

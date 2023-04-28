@@ -2,12 +2,12 @@ package com.stopbanner.src.controller;
 
 import com.stopbanner.config.BaseException;
 import com.stopbanner.config.BaseResponse;
-import com.stopbanner.src.model.Post.PostRes;
-import com.stopbanner.src.model.Report.ReportCreateReq;
-import com.stopbanner.src.model.Report.ReportCreateRes;
-import com.stopbanner.src.model.Report.ReportRes;
+import com.stopbanner.src.model.Report.PostReportReq;
+import com.stopbanner.src.model.Report.PostReportRes;
+import com.stopbanner.src.model.Report.GetReportRes;
 import com.stopbanner.src.security.SecurityUser;
 import com.stopbanner.src.service.ReportService;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -27,20 +27,21 @@ public class ReportController {
     }
 
 
-    @PostMapping("/create")
-    public BaseResponse<ReportCreateRes> create(@AuthenticationPrincipal SecurityUser securityUser,
-                                              @Valid @RequestBody ReportCreateReq reportCreateReq) {
+    @PostMapping("")
+    @ApiOperation(value = "신고 작성", notes = "게시글을 신고한다.")
+    public BaseResponse<PostReportRes> postReport(@AuthenticationPrincipal SecurityUser securityUser,
+                                                  @Valid @RequestBody PostReportReq postReportReq) {
         try {
-            return new BaseResponse<>(reportService.createReport(reportCreateReq, securityUser.getUser().getSub()));
+            return new BaseResponse<>(reportService.createReport(postReportReq, securityUser.getUser().getSub()));
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
 
-
-    // @Secured("ROLE_ADMIN")
-    @GetMapping("/get")
-    public BaseResponse<List<ReportRes>> login() {
+    @Secured("ROLE_ADMIN")
+    @GetMapping("")
+    @ApiOperation(value = "신고 조회", notes = "신고 목록을 조회한다.")
+    public BaseResponse<List<GetReportRes>> getReport() {
         try {
             return new BaseResponse<>(reportService.findAll());
         } catch (BaseException exception) {

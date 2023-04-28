@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PostLoginReq {
+public class PostUserLoginReq {
     @NotEmpty
     private String accessToken;
 }

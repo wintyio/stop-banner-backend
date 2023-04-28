@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostUpdateNameRes {
+public class PatchUserNameRes {
     private Long status;
 }

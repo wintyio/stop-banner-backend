@@ -6,6 +6,6 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostLoginRes {
+public class PostUserLoginRes {
     private String token;
 }

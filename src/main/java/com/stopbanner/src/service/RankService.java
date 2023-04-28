@@ -20,11 +20,11 @@ import static com.stopbanner.config.BaseResponseStatus.DATABASE_ERROR;
 @RequiredArgsConstructor
 @Transactional
 public class RankService {
-    private final PostRepository postRepository;
+    private final ForumRepository forumRepository;
     private final MemberRepository memberRepository;
     public List<GetRankUserRes> findRankUser() throws BaseException {
         try {
-            List<Object[]> objectsList = postRepository.findRankUser();
+            List<Object[]> objectsList = forumRepository.findRankUser();
             return objectsList.stream().map(GetRankUserRes::new).collect(Collectors.toList());
         } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
