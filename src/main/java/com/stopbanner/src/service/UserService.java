@@ -37,7 +37,7 @@ public class UserService {
         }
     }
 
-    public PostUserLoginRes login(String accessToken) throws BaseException {
+    public PostUserLoginRes kakaoLogin(String accessToken) throws BaseException {
         String sub = null;
         String requestURL = "https://kapi.kakao.com/v2/user/me";
 
@@ -70,6 +70,12 @@ public class UserService {
             throw new BaseException(FAILED_TO_KAKAO_LOGIN);
         }
 
+        PostUserLoginRes postUserLoginRes = new PostUserLoginRes();
+        postUserLoginRes.setToken(login(sub));
+        return postUserLoginRes;
+    }
+
+    public String login(String sub) throws BaseException {
         try {
             User user = userRepository.findBySub(sub);
             if (user == null) {
@@ -85,10 +91,7 @@ public class UserService {
             if (user.getActive() == false) {
                 throw new BaseException(DISABLED_USER);
             }
-            PostUserLoginRes postUserLoginRes = new PostUserLoginRes();
-            postUserLoginRes.setToken(jwtService.createJwt(user.getSub()));
-            postUserLoginRes.setName(user.getName());
-            return postUserLoginRes;
+            return jwtService.createJwt(sub);
         } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }

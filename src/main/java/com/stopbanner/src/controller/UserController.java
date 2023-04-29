@@ -39,7 +39,7 @@ public class UserController {
     @ApiOperation(value = "유저 로그인", notes = "유저 로그인 한다.")
     public BaseResponse<PostUserLoginRes> postLogin(@Valid @RequestBody PostUserLoginReq postUserLoginReq) {
         try {
-            return new BaseResponse<>(userService.login(postUserLoginReq.getAccessToken()));
+            return new BaseResponse<>(userService.kakaoLogin(postUserLoginReq.getAccessToken()));
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
