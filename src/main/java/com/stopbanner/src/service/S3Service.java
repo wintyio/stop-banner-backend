@@ -31,7 +31,7 @@ public class S3Service {
 
         String allow[] = {"jpeg", "jpg", "gif", "png"};
         if (!Arrays.asList(allow).contains(ext)) {
-            throw new BaseException(INVALID_EXT);
+            // throw new BaseException(INVALID_EXT);
         }
 
         ObjectMetadata objMeta = new ObjectMetadata();

@@ -36,6 +36,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String path = request.getRequestURI();
         String method = request.getMethod();
         if (method.equals("GET")) {
+            return false;
+        }
+        else {
             String[] exclude = {"/user/login", "/forum"};
             for (String ex : exclude) {
                 if (ex.equals(path)) return true;
@@ -46,7 +49,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
             return false;
         }
-        else return false;
     }
 
     // 나중에 provider로 바꾸면 좋음
