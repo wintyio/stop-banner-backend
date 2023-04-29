@@ -27,7 +27,7 @@ public class S3Service {
 
     public String upload(MultipartFile multipartFile) throws IOException, BaseException {
         String s3FileName = UUID.randomUUID() + "-" + multipartFile.getOriginalFilename();
-        String ext = s3FileName.substring(s3FileName.lastIndexOf(".") + 1);
+        String ext = multipartFile.getContentType();
 
         String allow[] = {"jpeg", "jpg", "gif", "png"};
         if (!Arrays.asList(allow).contains(ext)) {
