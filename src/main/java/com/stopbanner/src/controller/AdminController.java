@@ -33,15 +33,4 @@ public class AdminController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
-
-    @Secured("ROLE_ADMIN")
-    @GetMapping ("/login")
-    @ApiOperation(value = "로그인 토큰 생성", notes = "로그인 토큰을 생성한다.")
-    public BaseResponse<GetAdminLoginTokenRes> getLoginToken(@AuthenticationPrincipal SecurityUser securityUser) {
-        try {
-            return new BaseResponse<>(new GetAdminLoginTokenRes(userService.login(securityUser.getUser().getSub())));
-        } catch (BaseException exception) {
-            return new BaseResponse<>((exception.getStatus()));
-        }
-    }
 }
