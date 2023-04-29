@@ -72,8 +72,7 @@ public enum BaseResponseStatus {
     DATABASE_ERROR(false, 4000, "데이터베이스 연결에 실패하였습니다."),
     SERVER_ERROR(false, 4001, "서버와의 연결에 실패하였습니다."),
 
-    //[PATCH] /users/{userIdx}
-    MODIFY_FAIL_USERNAME(false,4014,"유저네임 수정 실패"),
+    EXISTS_USERNAME(false,4014,"중복된 닉네임입니다."),
 
     MODIFY_FAIL_DELETEUSER(false,4015,"유저 삭제 실패"),
 

@@ -98,7 +98,10 @@ public class UserService {
         try {
             User user = userRepository.findBySub(sub);
             if (user == null) throw new BaseException(USER_NOT_FOUND);
+            User dup = userRepository.findByName(patchUserNameReq.getName());
+            if (dup != null) throw new BaseException(EXISTS_USERNAME);
             user.setName(patchUserNameReq.getName());
+
             userRepository.save(user);
             return new PatchUserNameRes(1L);
         } catch (Exception e) {
