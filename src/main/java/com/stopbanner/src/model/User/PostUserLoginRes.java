@@ -8,4 +8,5 @@ import lombok.*;
 @NoArgsConstructor
 public class PostUserLoginRes {
     private String token;
+    private String name;
 }

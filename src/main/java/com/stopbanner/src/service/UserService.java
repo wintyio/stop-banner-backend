@@ -75,10 +75,11 @@ public class UserService {
             if (user == null) {
                 user = new User();
                 user.setSub(sub);
-                user.setName("사용자");
                 user.setRoll("ROLE_USER");
                 user.setCreateDate(LocalDateTime.now());
                 user.setActive(true);
+                userRepository.save(user);
+                user.setName("사냥꾼-" + user.getId());
                 userRepository.save(user);
             }
             if (user.getActive() == false) {
@@ -86,6 +87,7 @@ public class UserService {
             }
             PostUserLoginRes postUserLoginRes = new PostUserLoginRes();
             postUserLoginRes.setToken(jwtService.createJwt(user.getSub()));
+            postUserLoginRes.setName(user.getName());
             return postUserLoginRes;
         } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
