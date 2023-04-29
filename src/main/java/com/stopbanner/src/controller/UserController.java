@@ -2,6 +2,7 @@ package com.stopbanner.src.controller;
 
 import com.stopbanner.config.BaseException;
 import com.stopbanner.config.BaseResponse;
+import com.stopbanner.config.BaseResponseStatus;
 import com.stopbanner.src.model.User.*;
 import com.stopbanner.src.security.SecurityUser;
 import io.swagger.annotations.ApiOperation;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import static com.stopbanner.config.BaseResponseStatus.INTERNAL_SERVER_ERROR;
+
 @Slf4j
 @RestController
 @RequestMapping("/user")
@@ -20,6 +23,16 @@ public class UserController {
 
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @GetMapping ("")
+    @ApiOperation(value = "유저 정보", notes = "유저 정보를 확인한다.")
+    public BaseResponse<GetUserRes> get(@AuthenticationPrincipal SecurityUser securityUser) {
+        try {
+            return new BaseResponse<>(new GetUserRes(securityUser.getUser()));
+        } catch (Exception exception) {
+            return new BaseResponse<>(INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping ("/login")
