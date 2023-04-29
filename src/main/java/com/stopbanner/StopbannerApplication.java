@@ -20,7 +20,7 @@ public class StopbannerApplication {
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
 						.allowedMethods("*")
-						.allowedOrigins("http://localhost:3000", "http://localhost:8000", "https://api.bannerhunter.kr", "bannerhunter.kr", "www.bannerhunter.kr")
+						.allowedOrigins("http://localhost:3000", "http://localhost:8000", "https://api.bannerhunter.kr", "https://bannerhunter.kr", "https://www.bannerhunter.kr")
 						.allowedHeaders("*")
 						.allowCredentials(true);
 			}
