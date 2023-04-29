@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostReportReq {
     @NotNull
-    private Long forum_id;
+    private Long forumId;
     @NotNull
     private String classification;
     @NotEmpty

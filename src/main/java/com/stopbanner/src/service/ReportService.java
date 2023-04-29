@@ -27,7 +27,7 @@ public class ReportService {
         try {
             Report report = new Report();
             report.setReportor(userRepository.findBySub(sub));
-            report.setForum(forumRepository.getReferenceById(postReportReq.getForum_id()));
+            report.setForum(forumRepository.getReferenceById(postReportReq.getForumId()));
             report.setContent(postReportReq.getContent());
             report.setCreateDate(LocalDateTime.now());
             reportRepository.save(report);
