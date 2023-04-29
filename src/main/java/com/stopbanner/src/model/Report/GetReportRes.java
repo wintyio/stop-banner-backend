@@ -12,13 +12,13 @@ import lombok.Setter;
 public class GetReportRes {
     private Long id;
     private String reportorSub;
-    private Long post_id;
+    private Long forum_id;
     private String content;
     @Builder
     public GetReportRes(Report report) {
         this.id = report.getId();
         this.reportorSub = report.getReportor().getSub();
-        this.post_id = report.getForum().getId();
+        this.forum_id = report.getForum().getId();
         this.content = report.getContent();
     }
     public GetReportRes() {

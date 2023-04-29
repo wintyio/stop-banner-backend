@@ -17,7 +17,7 @@ public class Report {
     @JoinColumn(name = "reportor_id")
     private User reportor;
     @ManyToOne
-    @JoinColumn(name = "post_id")
+    @JoinColumn(name = "forum_id")
     private Forum forum;
     private String content;
     private String classification;
