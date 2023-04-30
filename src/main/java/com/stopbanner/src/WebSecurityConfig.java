@@ -1,10 +1,7 @@
 
 package com.stopbanner.src;
 
-import com.stopbanner.src.security.CustomAccessDeniedHandler;
-import com.stopbanner.src.security.CustomAuthenticationEntryPoint;
-import com.stopbanner.src.security.JwtAuthenticationFilter;
-import com.stopbanner.src.security.SecurityUserDetailsService;
+import com.stopbanner.src.security.*;
 import lombok.RequiredArgsConstructor;
 import com.stopbanner.utils.JwtService;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,21 +14,25 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true) // @Secured 사용
 @RequiredArgsConstructor
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig {
     private final CustomAuthenticationEntryPoint authenticationEntryPoint;
     private final CustomAccessDeniedHandler accessDeniedHandler;
     private final SecurityUserDetailsService securityUserDetailsService;
     private final JwtService jwtService;
-
     @Qualifier("handlerExceptionResolver")
     private final HandlerExceptionResolver handlerExceptionResolver;
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -42,9 +43,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new JwtAuthenticationFilter(securityUserDetailsService, jwtService, handlerExceptionResolver);
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
+    @Bean
+    protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
+        return http
                 .cors().and()
                 .csrf().disable()
                 .sessionManagement()
@@ -68,6 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().disable()
                 .addFilterBefore(jwtAuthenticationFilter(),
-                        UsernamePasswordAuthenticationFilter.class);
+                        UsernamePasswordAuthenticationFilter.class)
+                .build();
     }
 }
