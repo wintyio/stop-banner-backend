@@ -3,10 +3,7 @@ package com.stopbanner.src.controller;
 import com.stopbanner.config.BaseException;
 import com.stopbanner.config.BaseResponse;
 import com.stopbanner.config.BaseResponseStatus;
-import com.stopbanner.src.model.Forum.PostForumReq;
-import com.stopbanner.src.model.Forum.PostForumRes;
-import com.stopbanner.src.model.Forum.GetForumReq;
-import com.stopbanner.src.model.Forum.GetForumRes;
+import com.stopbanner.src.model.Forum.*;
 import com.stopbanner.src.security.SecurityUser;
 import com.stopbanner.src.service.ForumService;
 import com.stopbanner.src.service.S3Service;
@@ -50,6 +47,16 @@ public class ForumController {
     public BaseResponse<List<GetForumRes>> getForum(@Valid GetForumReq getForumReq) {
         try {
             return new BaseResponse<>(forumService.findAll(getForumReq));
+        } catch (BaseException exception) {
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+
+    @GetMapping ("/positions")
+    @ApiOperation(value = "좌표 조회", notes = "좌표들을 조회한다.")
+    public BaseResponse<List<Object[]>> getPositions() {
+        try {
+            return new BaseResponse<>(forumService.findPositions());
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
