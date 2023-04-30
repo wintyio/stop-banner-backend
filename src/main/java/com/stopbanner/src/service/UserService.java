@@ -1,5 +1,6 @@
 package com.stopbanner.src.service;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.stopbanner.config.BaseException;
@@ -37,7 +38,7 @@ public class UserService {
         }
     }
 
-    public PostUserLoginRes login(String accessToken) throws BaseException {
+    public PostUserLoginRes kakaoLogin(String accessToken) throws BaseException {
         String sub = null;
         String requestURL = "https://kapi.kakao.com/v2/user/me";
 
@@ -70,36 +71,46 @@ public class UserService {
             throw new BaseException(FAILED_TO_KAKAO_LOGIN);
         }
 
+        PostUserLoginRes postUserLoginRes = new PostUserLoginRes();
+        postUserLoginRes.setToken(login(sub));
+        return postUserLoginRes;
+    }
+
+    public String login(String sub) throws BaseException {
         try {
             User user = userRepository.findBySub(sub);
             if (user == null) {
                 user = new User();
                 user.setSub(sub);
-                user.setName("사용자");
                 user.setRoll("ROLE_USER");
                 user.setCreateDate(LocalDateTime.now());
                 user.setActive(true);
+                userRepository.save(user);
+                user.setName("사냥꾼-" + user.getId());
                 userRepository.save(user);
             }
             if (user.getActive() == false) {
                 throw new BaseException(DISABLED_USER);
             }
-            PostUserLoginRes postUserLoginRes = new PostUserLoginRes();
-            postUserLoginRes.setToken(jwtService.createJwt(user.getSub()));
-            return postUserLoginRes;
+            return jwtService.createJwt(sub);
+        } catch (BaseException exception) {
+            throw exception;
         } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }
     }
 
-    public PatchUserNameRes updateName(PatchUserNameReq patchUserNameReq, String sub) throws BaseException {
+    public PatchUserNameRes updateName(PatchUserNameReq patchUserNameReq, User user) throws BaseException {
         try {
-            User user = userRepository.findBySub(sub);
-            if (user == null) throw new BaseException(USER_NOT_FOUND);
+            User dup = userRepository.findByName(patchUserNameReq.getName());
+            if (dup != null) throw new BaseException(EXISTS_USERNAME);
             user.setName(patchUserNameReq.getName());
+
             userRepository.save(user);
             return new PatchUserNameRes(1L);
-        } catch (Exception e) {
+        } catch (BaseException exception) {
+            throw exception;
+        } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }
     }

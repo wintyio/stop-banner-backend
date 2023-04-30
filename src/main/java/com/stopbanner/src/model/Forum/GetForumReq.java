@@ -1,6 +1,8 @@
 package com.stopbanner.src.model.Forum;
 
 import lombok.*;
+import org.hibernate.validator.constraints.Range;
+
 import javax.validation.constraints.NotNull;
 
 
@@ -11,4 +13,8 @@ import javax.validation.constraints.NotNull;
 public class GetForumReq {
     @NotNull
     private Long id;
+
+    @NotNull
+    @Range(min=1, max=20)
+    private Long cnt;
 }

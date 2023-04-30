@@ -2,6 +2,7 @@ package com.stopbanner.src.service;
 
 import com.stopbanner.config.BaseException;
 import com.stopbanner.src.domain.Report;
+import com.stopbanner.src.domain.User;
 import com.stopbanner.src.model.Report.PostReportReq;
 import com.stopbanner.src.model.Report.PostReportRes;
 import com.stopbanner.src.model.Report.GetReportRes;
@@ -23,11 +24,11 @@ public class ReportService {
     private final ForumRepository forumRepository;
     private final ReportRepository reportRepository;
     private final UserRepository userRepository;
-    public PostReportRes createReport(PostReportReq postReportReq, String sub) throws BaseException {
+    public PostReportRes createReport(PostReportReq postReportReq, User user) throws BaseException {
         try {
             Report report = new Report();
-            report.setReportor(userRepository.findBySub(sub));
-            report.setForum(forumRepository.getReferenceById(postReportReq.getForum_id()));
+            report.setReportor(user);
+            report.setForum(forumRepository.getReferenceById(postReportReq.getForumId()));
             report.setContent(postReportReq.getContent());
             report.setCreateDate(LocalDateTime.now());
             reportRepository.save(report);

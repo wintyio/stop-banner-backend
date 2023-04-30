@@ -14,6 +14,7 @@ public class User {
     private Long id;
     @Column(unique = true)
     private String sub;
+    @Column(unique = true)
     private String name;
     private String roll;
     private LocalDateTime createDate;

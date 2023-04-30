@@ -17,7 +17,7 @@ import java.util.List;
 @Slf4j
 public class GetForumRes {
     private Long id;
-    private String sub;
+    private String name;
     private String img;
     private Double lat;
     private Double lng;
@@ -30,7 +30,8 @@ public class GetForumRes {
     @Builder
     public GetForumRes(Forum forum){
         this.id = forum.getId();
-        this.sub = forum.getUser().getSub();
+        // this.sub = forum.getUser().getSub();
+        this.name = forum.getUser().getName();
         this.img = forum.getImg();
         this.lat = forum.getLat();
         this.lng = forum.getLng();

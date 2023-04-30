@@ -35,18 +35,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String path = request.getRequestURI();
         String method = request.getMethod();
-        if (method.equals("GET")) {
-            String[] exclude = {"/user/login", "/forum"};
-            for (String ex : exclude) {
-                if (ex.equals(path)) return true;
-            }
-            String[] exclude2 = {"/swagger-ui", "/swagger-resources", "/v3/api-docs", "/rank"};
-            for (String ex : exclude2) {
-                if (path.startsWith(ex)) return true;
-            }
-            return false;
+        String[] exclude = {"/user/login", "POST", "/forum", "GET", "/test/login", "GET", "forum/positions", "GET"};
+        for (int i=0; i<exclude.length; i+=2) {
+            if (exclude[i].equals(path) && method.equals(exclude[i+1])) return true;
         }
-        else return false;
+        String[] exclude2 = {"/swagger-ui", "/swagger-resources", "/v3/api-docs", "/rank"};
+        for (String ex : exclude2) {
+            if (path.startsWith(ex)) return true;
+        }
+        return false;
     }
 
     // 나중에 provider로 바꾸면 좋음

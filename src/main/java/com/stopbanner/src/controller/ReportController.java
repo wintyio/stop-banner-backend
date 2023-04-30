@@ -32,7 +32,7 @@ public class ReportController {
     public BaseResponse<PostReportRes> postReport(@AuthenticationPrincipal SecurityUser securityUser,
                                                   @Valid @RequestBody PostReportReq postReportReq) {
         try {
-            return new BaseResponse<>(reportService.createReport(postReportReq, securityUser.getUser().getSub()));
+            return new BaseResponse<>(reportService.createReport(postReportReq, securityUser.getUser()));
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }

@@ -2,12 +2,15 @@ package com.stopbanner.src.controller;
 
 import com.stopbanner.config.BaseException;
 import com.stopbanner.config.BaseResponse;
+import com.stopbanner.src.model.Admin.GetAdminLoginTokenRes;
 import com.stopbanner.src.model.Admin.PatchAdminActiveReq;
 import com.stopbanner.src.model.Admin.PatchAdminActiveRes;
+import com.stopbanner.src.security.SecurityUser;
 import com.stopbanner.src.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
