@@ -78,6 +78,7 @@ public enum BaseResponseStatus {
 
     PASSWORD_ENCRYPTION_ERROR(false, 4011, "비밀번호 암호화에 실패하였습니다."),
     PASSWORD_DECRYPTION_ERROR(false, 4012, "비밀번호 복호화에 실패하였습니다."),
+    JSON_ERROR(false, 4040, "JSON 파싱에 실패하였습니다."),
 
     INTERNAL_SERVER_ERROR(false, 6000, "서버 오류");
     private final boolean isSuccess;
