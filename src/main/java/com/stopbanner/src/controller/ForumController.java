@@ -37,7 +37,7 @@ public class ForumController {
                                                 @Valid PostForumReq postForumReq) {
         try {
             String url = s3Service.upload(postForumReq.getImg());
-            return new BaseResponse<>(forumService.createPost(postForumReq, url, securityUser.getUser().getSub()));
+            return new BaseResponse<>(forumService.createPost(postForumReq, url, securityUser.getUser()));
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         } catch (IOException exception) {
