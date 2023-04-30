@@ -22,14 +22,13 @@ public class TestController {
         this.userService = userService;
     }
 
-    /*
+
     @GetMapping ("/login")
     public BaseResponse<GetAdminLoginTokenRes> getLoginToken() {
         try {
-            return new BaseResponse<>(new GetAdminLoginTokenRes(userService.login("1234")));
+            return new BaseResponse<>(new GetAdminLoginTokenRes(userService.login("2768604477")));
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
-    */
 }

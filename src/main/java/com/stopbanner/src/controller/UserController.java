@@ -50,7 +50,7 @@ public class UserController {
     public BaseResponse<PatchUserNameRes> patchName(@Valid @RequestBody PatchUserNameReq patchUserNameReq,
                                                   @AuthenticationPrincipal SecurityUser securityUser) {
         try {
-            return new BaseResponse<>(userService.updateName(patchUserNameReq, securityUser.getUser().getSub()));
+            return new BaseResponse<>(userService.updateName(patchUserNameReq, securityUser.getUser()));
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
