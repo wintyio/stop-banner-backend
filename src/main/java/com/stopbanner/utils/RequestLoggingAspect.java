@@ -55,14 +55,16 @@ public class RequestLoggingAspect {
         } finally {
             String host = request.getRemoteHost();
             long end = System.currentTimeMillis();
-            log.info("Request: {} {}{} < {} ({}ms)", request.getMethod(), request.getRequestURI(), params, host, end - start);
+            String str = String.format("Request: %s %s%s < %s (%dms)", request.getMethod(), request.getRequestURI(), params, host, end - start);
+            // log.info("Request: {} {}{} < {} ({}ms)", request.getMethod(), request.getRequestURI(), params, host, end - start);
             if (cachingRequest.getContentType() != null && cachingRequest.getContentType().contains("application/json")) {
                 if (cachingRequest.getContentAsByteArray() != null && cachingRequest.getContentAsByteArray().length != 0){
-                    log.info("Request Body: {} < {}", objectMapper.readTree(cachingRequest.getContentAsByteArray()), host);
+                    str += " " + objectMapper.readTree(cachingRequest.getContentAsByteArray());
                 }
             }
+            log.info(str);
             try {
-                log.info("Response Body: {} < {}", objectMapper.writeValueAsString(result), host);
+                log.info("Response: {} < {}", objectMapper.writeValueAsString(result), host);
             }
             catch (Exception exception) {
                 log.error("in loggin aop, this reponse is not BaseResponse");
