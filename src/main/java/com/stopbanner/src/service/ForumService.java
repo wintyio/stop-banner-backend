@@ -13,11 +13,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.stopbanner.config.BaseResponseStatus.DATABASE_ERROR;
 import static com.stopbanner.config.BaseResponseStatus.USER_NOT_FOUND;
+import static java.lang.Math.min;
 
 @Slf4j
 @Service
@@ -60,6 +62,7 @@ public class ForumService {
     public List<GetForumRes> findAll(GetForumReq getForumReq) throws BaseException {
         try {
             List<Forum> list = forumRepository.findTop20ByIdLessThanAndIsActiveTrueOrderByIdDesc(getForumReq.getId());
+            list.subList(min(getForumReq.getCnt().intValue(), list.size()), list.size()).clear();
             return list.stream().map(GetForumRes::new).collect(Collectors.toList());
         }
         catch (Exception exception) {

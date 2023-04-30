@@ -26,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping ("")
-    @ApiOperation(value = "유저 정보", notes = "유저 정보를 확인한다.")
+    @ApiOperation(value = "유저 정보", notes = "유저 정보를 조회한다.")
     public BaseResponse<GetUserRes> get(@AuthenticationPrincipal SecurityUser securityUser) {
         try {
             return new BaseResponse<>(new GetUserRes(securityUser.getUser()));

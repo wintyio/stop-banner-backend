@@ -46,7 +46,7 @@ public class ForumController {
     }
 
     @GetMapping ("")
-    @ApiOperation(value = "게시글 조회", notes = "x보다 id가 작은 게시글 중에서 id가 제일 큰 20개 게시글을 조회한다.")
+    @ApiOperation(value = "게시글 조회", notes = "x보다 id가 작은 게시글 중에서 id가 제일 큰 cnt개 게시글을 조회한다.")
     public BaseResponse<List<GetForumRes>> getForum(@Valid GetForumReq getForumReq) {
         try {
             return new BaseResponse<>(forumService.findAll(getForumReq));
