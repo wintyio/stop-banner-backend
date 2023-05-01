@@ -17,8 +17,7 @@ public class SecurityUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String sub)
-            throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String sub) throws UsernameNotFoundException {
 
         User user = userRepository.findBySub(sub);
         if (user == null) {
@@ -26,8 +25,7 @@ public class SecurityUserDetailsService implements UserDetailsService {
         }
         return new SecurityUser(user);
     }
-    public UserDetails loadUserByUserid(Long userId)
-            throws UsernameNotFoundException {
+    public UserDetails loadUserByUserid(Long userId) throws UsernameNotFoundException {
 
         Optional<User> user = userRepository.findById(userId);
         if (user.isEmpty()) {
