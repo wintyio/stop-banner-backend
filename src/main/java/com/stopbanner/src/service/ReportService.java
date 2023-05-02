@@ -26,7 +26,7 @@ public class ReportService {
     private final ReportRepository reportRepository;
     private final UserRepository userRepository;
     public PostReportRes createReport(PostReportReq postReportReq, User user) throws BaseException {
-        if (user.getName().equals("익명")) {
+        if (user.getName().equals("익명의 사냥꾼")) {
             throw new BaseException(FAIL_ANONYMOUS);
         }
         try {

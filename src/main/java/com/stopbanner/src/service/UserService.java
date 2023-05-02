@@ -102,7 +102,7 @@ public class UserService {
 
     public PatchUserNameRes updateName(PatchUserNameReq patchUserNameReq, User user) throws BaseException {
         try {
-            if (user.getName().equals("익명")) {
+            if (user.getName().equals("익명의 사냥꾼")) {
                 throw new BaseException(FAIL_ANONYMOUS);
             }
             User dup = userRepository.findByName(patchUserNameReq.getName());
