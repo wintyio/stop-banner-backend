@@ -34,11 +34,6 @@ public class WebSecurityConfig {
     private final HandlerExceptionResolver handlerExceptionResolver;
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter(securityUserDetailsService, jwtService, handlerExceptionResolver);
     }

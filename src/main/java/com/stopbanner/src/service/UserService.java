@@ -102,6 +102,9 @@ public class UserService {
 
     public PatchUserNameRes updateName(PatchUserNameReq patchUserNameReq, User user) throws BaseException {
         try {
+            if (user.getName().equals("익명")) {
+                throw new BaseException(FAIL_ANONYMOUS);
+            }
             User dup = userRepository.findByName(patchUserNameReq.getName());
             if (dup != null) throw new BaseException(EXISTS_USERNAME);
             user.setName(patchUserNameReq.getName());

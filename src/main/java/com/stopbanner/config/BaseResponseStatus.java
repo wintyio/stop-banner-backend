@@ -28,7 +28,8 @@ public enum BaseResponseStatus {
 
     USER_NOT_FOUND(false, 2007, "유저를 찾을 수 없습니다."),
 
-    INVALID_TOKEN(false, 2007, "유효하지 않은 토큰입니다."),
+    INVALID_TOKEN(false, 2008, "유효하지 않은 토큰입니다."),
+    FAIL_ANONYMOUS(false,2009,"익명으로는 할 수 없습니다. 카카로 로그인을 이용해 주세요"),
 
     // users
     USERS_EMPTY_USER_ID(false, 2010, "유저 아이디 값을 확인해주세요."),
@@ -63,6 +64,7 @@ public enum BaseResponseStatus {
     FAILED_TO_GOOGLE_LOGIN(false,3015,"가입된 구글 계정이 없습니다."),
     FAILED_TO_KAKAO_LOGIN(false,3016,"카카오 로그인 에러"),
     DISABLED_USER(false,3017,"삭제된 사용자입니다."),
+    FAIL_TO_CREATE_TOKEN(false,3018,"토큰 생성에 실패하였습니다."),
 
 
 
