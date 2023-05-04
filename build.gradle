@@ -64,6 +64,9 @@ dependencies {
 
 	// QueryDSL
 	// implementation "com.querydsl:querydsl-jpa"
+
+	// aop 에서 사용
+	implementation("com.google.guava:guava:31.1-jre")
 }
 
 tasks.named('test') {

@@ -49,17 +49,20 @@ public class UserService {
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Authorization", "Bearer " + accessToken);
 
-            int responseCode = conn.getResponseCode();
-            BufferedReader buffer = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                throw new BaseException(FAILED_TO_KAKAO_LOGIN);
+            }
 
-            String line = "";
-            String result = "";
-            while ((line = buffer.readLine()) != null) {
-                result +=line;
+            StringBuilder result = new StringBuilder();
+            try (BufferedReader buffer = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+                String line;
+                while ((line = buffer.readLine()) != null) {
+                    result.append(line);
+                }
             }
 
             JsonParser parser = new JsonParser();
-            JsonElement element = parser.parse(result);
+            JsonElement element = parser.parse(result.toString());
             sub = element.getAsJsonObject().get("id").getAsString();
 
             // JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
@@ -102,6 +105,9 @@ public class UserService {
 
     public PatchUserNameRes updateName(PatchUserNameReq patchUserNameReq, User user) throws BaseException {
         try {
+            if (user.getName().equals("익명의 사냥꾼")) {
+                throw new BaseException(FAIL_ANONYMOUS);
+            }
             User dup = userRepository.findByName(patchUserNameReq.getName());
             if (dup != null) throw new BaseException(EXISTS_USERNAME);
             user.setName(patchUserNameReq.getName());

@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.stopbanner.config.BaseResponseStatus.DATABASE_ERROR;
+import static com.stopbanner.config.BaseResponseStatus.FAIL_ANONYMOUS;
 
 @Slf4j
 @Service
@@ -25,6 +26,9 @@ public class ReportService {
     private final ReportRepository reportRepository;
     private final UserRepository userRepository;
     public PostReportRes createReport(PostReportReq postReportReq, User user) throws BaseException {
+        if (user.getName().equals("익명의 사냥꾼")) {
+            throw new BaseException(FAIL_ANONYMOUS);
+        }
         try {
             Report report = new Report();
             report.setReportor(user);

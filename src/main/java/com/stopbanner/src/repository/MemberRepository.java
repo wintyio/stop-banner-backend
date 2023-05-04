@@ -6,9 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    @Query(value = "SELECT party_id, COUNT(*) AS count FROM member GROUP BY party_id ORDER BY count DESC", nativeQuery = true)
+    @Query(value = "SELECT party_id, COUNT(*) AS count FROM member GROUP BY party_id ORDER BY count DESC LIMIT 11", nativeQuery = true)
     List<Object[]> findRankParty();
 
     @Query(value = "SELECT name, party_id, COUNT(*) AS count FROM member GROUP BY name ORDER BY count DESC", nativeQuery = true)

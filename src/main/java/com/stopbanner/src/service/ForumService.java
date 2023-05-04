@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,8 +45,8 @@ public class ForumService {
             forum.setLocal(localRepository.getReferenceById(postForumReq.getLocalId()));
             forum.setIsActive(true);
             forumRepository.save(forum);
-            for (int i = 0; i< postForumReq.getNames().size(); i++) {
-                memberService.createMember(postForumReq.getNames().get(i), forum.getId(), postForumReq.getParties().get(i));
+            for (PostForumReqMember member : postForumReq.getMembers()) {
+                memberService.createMember(member.getName(), forum.getId(), member.getPartyId());
             }
             PostForumRes postForumRes = new PostForumRes(1L);
             return postForumRes;

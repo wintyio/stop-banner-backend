@@ -17,7 +17,7 @@ import java.util.Map;
 public class ApiControllerAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<BaseResponse<Map<String, String>>> handleValidationExceptions(MethodArgumentNotValidException exception) {
-        log.error(BaseResponseStatus.REQUEST_ERROR.getMessage());
+        // log.error(BaseResponseStatus.REQUEST_ERROR.getMessage());
         Map<String, String> errors = new HashMap<>();
         exception.getBindingResult().getAllErrors()
                 .forEach(c -> errors.put(((FieldError) c).getField(), c.getDefaultMessage()));
@@ -26,13 +26,13 @@ public class ApiControllerAdvice {
 
     @ExceptionHandler(BaseException.class)
     public BaseResponse<BaseException> baseException(BaseException e) {
-        log.error(e.getStatus().getMessage());
+        // log.error(e.getStatus().getMessage());
         return new BaseResponse<>(e.getStatus());
     }
 
     @ExceptionHandler(BindException.class)
     public ResponseEntity<BaseResponse<Map<String, String>>> bindException(BindException exception) {
-        log.error(BaseResponseStatus.REQUEST_ERROR.getMessage());
+        // log.error(BaseResponseStatus.REQUEST_ERROR.getMessage());
         Map<String, String> errors = new HashMap<>();
         exception.getBindingResult().getAllErrors()
                 .forEach(c -> errors.put(((FieldError) c).getField(), c.getDefaultMessage()));
@@ -41,7 +41,7 @@ public class ApiControllerAdvice {
 
     @ExceptionHandler(Exception.class)
     public BaseResponse<String> exception(Exception exception) {
-        log.error(exception.getMessage());
+        // log.error(exception.getMessage());
         return new BaseResponse<>(BaseResponseStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
     }
 }

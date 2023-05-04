@@ -18,8 +18,8 @@ public enum BaseResponseStatus {
      */
     // Common
     REQUEST_ERROR(false, 2000, "입력값을 확인해주세요."),
-    EMPTY_JWT(false, 2001, "JWT를 입력해주세요."),
-    INVALID_JWT(false, 2002, "유효하지 않은 JWT입니다."),
+    EMPTY_JWT(false, 2001, "토큰이 존재하지 않습니다. 로그인 바랍니다."),
+    INVALID_JWT(false, 2002, "토큰이 만료되었습니다. 다시 로그인 바랍니다."),
     INVALID_USER_JWT(false,2003,"권한이 없는 유저의 접근입니다."),
     REQUEST_JWT_ERROR(false,2004,"토큰 입력형식이 잘못되었습니다."),
 
@@ -28,7 +28,8 @@ public enum BaseResponseStatus {
 
     USER_NOT_FOUND(false, 2007, "유저를 찾을 수 없습니다."),
 
-    INVALID_TOKEN(false, 2007, "유효하지 않은 토큰입니다."),
+    INVALID_TOKEN(false, 2008, "유효하지 않은 토큰입니다."),
+    FAIL_ANONYMOUS(false,2009,"익명으로는 할 수 없습니다. 카카로 로그인을 이용해 주세요"),
 
     // users
     USERS_EMPTY_USER_ID(false, 2010, "유저 아이디 값을 확인해주세요."),
@@ -63,6 +64,7 @@ public enum BaseResponseStatus {
     FAILED_TO_GOOGLE_LOGIN(false,3015,"가입된 구글 계정이 없습니다."),
     FAILED_TO_KAKAO_LOGIN(false,3016,"카카오 로그인 에러"),
     DISABLED_USER(false,3017,"삭제된 사용자입니다."),
+    FAIL_TO_CREATE_TOKEN(false,3018,"토큰 생성에 실패하였습니다."),
 
 
 
@@ -78,6 +80,7 @@ public enum BaseResponseStatus {
 
     PASSWORD_ENCRYPTION_ERROR(false, 4011, "비밀번호 암호화에 실패하였습니다."),
     PASSWORD_DECRYPTION_ERROR(false, 4012, "비밀번호 복호화에 실패하였습니다."),
+    JSON_ERROR(false, 4040, "JSON 파싱에 실패하였습니다."),
 
     INTERNAL_SERVER_ERROR(false, 6000, "서버 오류");
     private final boolean isSuccess;
