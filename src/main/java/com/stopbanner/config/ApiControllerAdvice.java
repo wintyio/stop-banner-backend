@@ -42,6 +42,6 @@ public class ApiControllerAdvice {
     @ExceptionHandler(Exception.class)
     public BaseResponse<String> exception(Exception exception) {
         // log.error(exception.getMessage());
-        return new BaseResponse<>(BaseResponseStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        return new BaseResponse<>(BaseResponseStatus.INTERNAL_SERVER_ERROR, "exception");
     }
 }
